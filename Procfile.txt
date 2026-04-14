@@ -1,1 +1,3 @@
-worker: python bot_resep_kopi.py
+python-telegram-bot==20.7
+Flask
+gunicorn
