@@ -28,7 +28,7 @@ from telegram.ext import (
 import anthropic
 
 # ===================== KONFIGURASI =====================
-BOT_TOKEN = "8666305875"
+BOT_TOKEN = "8666305875:AAFyZojgPibD_kOK1nA1wBsxNGcKOB75-3E"
 ANTHROPIC_API_KEY = "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"
 WEBAPP_URL = "https://iridescent-otter-0b20a1.netlify.app/"  # contoh: https://amazing-coffee-123.netlify.app
 
