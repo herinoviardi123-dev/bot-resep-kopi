@@ -46,7 +46,7 @@ RESEP_KOPI = {
         "nama": "☕ Espresso Klasik",
         "deskripsi": "Kopi pekat Italia yang kuat dan beraroma",
         "bahan": [
-            "18g kopi bubuk (sangrai gelap)",
+            "18g kopi bubuk (sangrai medium to dark)",
             "30ml air panas (90-95°C)",
         ],
         "langkah": [
