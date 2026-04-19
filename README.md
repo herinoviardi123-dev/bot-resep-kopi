@@ -1,6 +1,6 @@
 # ☕ Hey Kopi PWA — Deploy Guide
 
-**URL Production:** [https://boisterous-cucurucho-2a78f0.netlify.app/]
+**URL Production:** https://boisterous-cucurucho-2a78f0.netlify.app
 
 ---
 
@@ -82,7 +82,7 @@ netlify deploy --prod --dir .
 ```
 Di @BotFather:
 /newapp → pilih bot kamu
-→ Set URL: https://iridescent-otter-0b20a1.netlify.app
+→ Set URL: https://boisterous-cucurucho-2a78f0.netlify.app
 → Set title: Hey Kopi
 → Set description: Resep & Kalkulator Kopi
 ```
@@ -90,7 +90,7 @@ Di @BotFather:
 ### 3. Aktifkan Menu Button
 ```
 /mybots → pilih bot → Bot Settings → Menu Button
-→ Set URL: https://iridescent-otter-0b20a1.netlify.app
+→ Set URL: https://boisterous-cucurucho-2a78f0.netlify.app
 → Set button text: ☕ Hey Kopi
 ```
 
@@ -108,7 +108,7 @@ HPP:     https://t.me/NAMABOT/heykopi?startapp=hpp
 
 1. Buat akun di https://onesignal.com
 2. Create App → Web Push
-3. Set Site URL: `https://iridescent-otter-0b20a1.netlify.app`
+3. Set Site URL: `https://boisterous-cucurucho-2a78f0.netlify.app`
 4. Salin **App ID**
 5. Di `index.html`, cari: `YOUR_ONESIGNAL_APP_ID`
 6. Ganti dengan App ID kamu
