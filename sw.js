@@ -3,9 +3,9 @@
    Netlify: https://boisterous-cucurucho-2a78f0.netlify.app
 ══════════════════════════════════════════════ */
 
-const CACHE_NAME = 'heykopi-v1';
-const STATIC_CACHE = 'heykopi-static-v1';
-const FONT_CACHE = 'heykopi-fonts-v1';
+const CACHE_NAME = 'heykopi-v30';
+const STATIC_CACHE = 'heykopi-static-v29';
+const FONT_CACHE = 'heykopi-fonts-v29';
 
 // Core files to cache immediately
 const CORE_FILES = [
