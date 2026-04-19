@@ -31,7 +31,7 @@ import anthropic
 # Dibaca otomatis dari Railway Environment Variables
 BOT_TOKEN = "8666305875:AAGvLc3NHV7GFU0qP-tx6KVztcbcjyooOf8"
 ANTHROPIC_API_KEY = "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"
-WEBAPP_URL = "https://boisterous-cucurucho-2a78f0.netlify.app/"  # contoh: https://amazing-coffee-123.netlify.app
+WEBAPP_URL = "https://bot-resep-kopi.herinoviardi123.workers.dev/"  # contoh: https://amazing-coffee-123.netlify.app
 
 
 # ===================== SETUP LOGGING =====================
