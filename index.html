@@ -83,10 +83,9 @@
   --r:20px;--r2:16px;--r3:12px;--r4:24px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;outline:none}
-html{height:100%;overflow:hidden}
+html{height:100%;overflow:hidden;position:fixed;width:100%}
 body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--bg);
-  display:flex;flex-direction:column;height:100%;max-width:430px;
-  margin:0 auto;overflow:hidden;position:relative;
+  max-width:430px;margin:0 auto;position:relative;height:100%;min-height:100%;
   -webkit-user-select:none;user-select:none;
   /* iOS safe area */
   padding-top:env(safe-area-inset-top);
@@ -161,11 +160,11 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--bg);
 /* ══════════════════════════════════════
    APP SHELL
 ══════════════════════════════════════ */
-#app{flex:1;display:flex;flex-direction:column;height:100%;opacity:0;transition:opacity .6s .2s;overflow:hidden}
+#app{opacity:0;transition:opacity .6s .2s}
 #app.show{opacity:1}
 
 /* ── APPBAR ──────────────────────── */
-.ab{background:var(--bg);padding:13px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;z-index:50;border-bottom:1px solid rgba(196,154,108,.15)}
+.ab{position:fixed;top:0;left:0;right:0;max-width:430px;margin:0 auto;background:var(--bg);padding:11px 18px;display:flex;align-items:center;justify-content:space-between;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .ab-lg{display:flex;align-items:center;gap:10px;cursor:pointer}
 .ab-nm{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;
   background:var(--gold-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.5px}
@@ -177,24 +176,47 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--bg);
 
 /* ── PAGES ──────────────────────── */
 .pages{flex:1;overflow:hidden;position:relative}
-.pg{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:none}
+.pg{
+  display:none;
+  position:fixed;
+  top:60px;
+  left:0;right:0;
+  bottom:60px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
 .pg.on{display:block}
-.pgp{padding:16px 18px 90px}
+.pgp{padding:16px 18px 24px}
 .pg::-webkit-scrollbar{width:0}
 
 /* ── BOTTOM NAV ─────────────────── */
-.bnav{background:var(--bg);display:flex;flex-shrink:0;z-index:50;padding:10px 10px max(env(safe-area-inset-bottom),10px)}
-.bni{flex:1;padding:8px 2px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .2s;position:relative}
+.bnav{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  max-width:430px;
+  margin:0 auto;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  z-index:200;
+  height:60px;
+  padding:0 8px;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  box-shadow:0 -2px 12px rgba(0,0,0,.08);
+}
+.bni{flex:1;padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent;}
 .bni svg{width:21px;height:21px;stroke:rgba(154,132,114,.4);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:all .2s}
 .bni span{font-size:9px;font-weight:400;color:rgba(154,132,114,.5);letter-spacing:.3px;transition:all .2s}
 .bni.on svg{stroke:var(--gold)}
 .bni.on span{color:var(--gold);font-weight:600}
 .bni-center{
-  width:52px;height:52px;border-radius:50%;
+  width:50px;height:50px;border-radius:50%;
   background:var(--gold-shine);
-  box-shadow:3px 3px 10px rgba(166,148,126,.5),-2px -2px 8px rgba(255,252,244,.9),0 0 20px rgba(196,154,108,.3);
+  box-shadow:3px 3px 10px rgba(166,148,126,.5),-2px -2px 8px rgba(255,252,244,.9),0 0 16px rgba(196,154,108,.3);
   display:flex;align-items:center;justify-content:center;
-  cursor:pointer;margin-top:-16px;transition:all .2s;border:none;flex-shrink:0;
+  cursor:pointer;margin-top:-8px;transition:all .2s;border:none;flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;
 }
 .bni-center:active{transform:scale(.92);box-shadow:var(--nm-pressed)}
 .bni-center svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -912,7 +934,8 @@ setTimeout(function(){
     </div></div>
 
     <!-- KALK BOTOL -->
-    <div class="pg" id="pg-resepb">
+    <div class="pg" id="pg-resepb"><div class="pgp" style="padding:0">
+      <div class="phd" style="padding:14px 18px 0"><button class="bk" onclick="prevNav()">←</button><div class="pht2">Resep Botol</div></div>
       <div class="ktop">
         <div class="swrap">
           <button class="swb" id="sw200" onclick="setSW(200)">200ml</button>
@@ -933,8 +956,9 @@ setTimeout(function(){
     </div>
 
     <!-- KALK CUP -->
-    <div class="pg" id="pg-resepc">
-      <div class="ktop" style="padding-top:14px">
+    <div class="pg" id="pg-resepc"><div class="pgp" style="padding:0">
+      <div class="phd" style="padding:14px 18px 0"><button class="bk" onclick="prevNav()">←</button><div class="pht2">Resep Cup</div></div>
+      <div class="ktop">
         <div class="qpill" style="flex:1"><label>Jumlah Cup Ice</label><input class="qty-inp" id="cqn" type="number" value="1" min="1" max="999" oninput="setQManual('c',this.value)">
           <button class="qb" onclick="chgQ('c',-1)">−</button>
           <button class="qb" onclick="chgQ('c',1)" style="margin-right:4px">+</button>
@@ -951,22 +975,24 @@ setTimeout(function(){
 
     <!-- KALK CUSTOM -->
 
-    <div class="pg" id="pg-kopi"><div class="pgp" id="dkpg"></div></div>
+    <div class="pg" id="pg-kopi"><div class="pgp"><div class="phd"><button class="bk" onclick="prevNav()">←</button><div class="pht2">Resep Kopi</div></div><div id="dkpg"></div></div>
     <!-- DAFTAR NON KOPI -->
-    <div class="pg" id="pg-nonkopi"><div class="pgp" id="dncpg"></div></div>
+    <div class="pg" id="pg-nonkopi"><div class="pgp"><div class="phd"><button class="bk" onclick="prevNav()">←</button><div class="pht2">Non Kopi</div></div><div id="dncpg"></div></div>
 
     <!-- HPP -->
     <div class="pg" id="pg-hpp"><div class="pgp">
+      <div class="phd"><button class="bk" onclick="prevNav()">←</button><div class="pht2">Hitung HPP</div></div>
       <div class="sec"><h2>Hitung HPP</h2><div class="sec-ln"></div></div>
       <div class="hpp-tabs" id="hpptabs"></div>
       <div id="hppcontent"></div>
     </div></div>
 
     <!-- INFO -->
-    <div class="pg" id="pg-info"><div class="pgp" id="infopg"></div></div>
+    <div class="pg" id="pg-info"><div class="pgp"><div class="phd"><button class="bk" onclick="prevNav()">←</button><div class="pht2">Info Kopi</div></div><div id="infopg"></div></div>
 
     <!-- REPORT -->
     <div class="pg" id="pg-report"><div class="pgp">
+      <div class="phd"><button class="bk" onclick="prevNav()">←</button><div class="pht2">Report</div></div>
       <div class="sec"><h2>Report</h2><div class="sec-ln"></div></div>
       <div class="rpt-type">
         <button class="rtype on" onclick="setRT('prod',this)">📦 Produksi</button>
@@ -994,6 +1020,7 @@ setTimeout(function(){
 
     <!-- BREW -->
     <div class="pg" id="pg-brew"><div class="pgp">
+      <div class="phd"><button class="bk" onclick="prevNav()">←</button><div class="pht2">Menu Brew</div></div>
       <div class="sec"><h2>Menu Brew</h2><div class="sec-ln"></div></div>
       <div class="brew-grid" id="brewgrid"></div>
       <div id="brewguide"></div>
@@ -1285,6 +1312,7 @@ setTimeout(function(){
 
     <!-- ABOUT -->
     <div class="pg" id="pg-about"><div class="pgp">
+      <div class="phd"><button class="bk" onclick="prevNav()">←</button><div class="pht2">About</div></div>
       <div class="ph">
         <div class="phav"><svg viewBox="0 0 24 24" style="width:40px;height:40px;stroke:var(--gold);fill:none;stroke-width:1.5"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
         <div class="phn" id="about-toko-display">Hey Kopi</div>
@@ -1368,29 +1396,33 @@ setTimeout(function(){
     </div></div>
     <!-- FAVORIT -->
     <div class="pg" id="pg-favorit"><div class="pgp">
+      <div class="phd"><button class="bk" onclick="prevNav()">←</button><div class="pht2">❤ Favorit</div></div>
       <div class="sec"><h2>❤ Favorit</h2><div class="sec-ln"></div></div>
       <div id="favpg"></div>
     </div></div>
 
   <!-- BOTTOM NAV -->
-  <div class="bnav">
-    <div class="bni" id="bni-kopi" onclick="nav('kopi')"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg><span>Resep</span></div>
-    <div class="bni" id="bni-transaksi" onclick="nav('transaksi')"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h6"/></svg><span>Transaksi</span></div>
+  <nav class="bnav" role="navigation">
+    <div class="bni" id="bni-kopi" onclick="nav('kopi')">
+      <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      <span>Resep</span>
+    </div>
+    <div class="bni" id="bni-transaksi" onclick="nav('transaksi')">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h6"/></svg>
+      <span>Transaksi</span>
+    </div>
     <button class="bni-center" id="bni-home" onclick="nav('home')">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </button>
-    <div class="bni" id="bni-brew" onclick="nav('brew')"><svg viewBox="0 0 24 24"><path d="M8 2h8l1 4H7L8 2z"/><path d="M6 6h12l-1.5 12a2 2 0 0 1-2 1.8H9.5a2 2 0 0 1-2-1.8z"/></svg><span>Brew</span></div>
-    <div class="bni" id="bni-report" onclick="nav('report')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg><span>Report</span></div>
-  </div>"bnav">
-    <div class="bni on" onclick="nav('home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
-    <div class="bni" onclick="nav('kopi')"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg><span>Resep</span></div>
-    <button class="bni-center" onclick="nav('botol')">
-      <svg viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="18" rx="3"/><path d="M8 7h8"/><path d="M10 3V1h4v2"/></svg>
-    </button>
-    <div class="bni" onclick="nav('brew')"><svg viewBox="0 0 24 24"><path d="M8 2h8l1 4H7L8 2z"/><path d="M6 6h12l-1.5 12a2 2 0 0 1-2 1.8H9.5a2 2 0 0 1-2-1.8z"/><path d="M10 10v6M14 10v6"/></svg><span>Brew</span></div>
-    <div class="bni" onclick="nav('report')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg><span>Report</span></div>
-  </div>
-</div>
+    <div class="bni" id="bni-brew" onclick="nav('brew')">
+      <svg viewBox="0 0 24 24"><path d="M8 2h8l1 4H7L8 2z"/><path d="M6 6h12l-1.5 12a2 2 0 0 1-2 1.8H9.5a2 2 0 0 1-2-1.8z"/></svg>
+      <span>Brew</span>
+    </div>
+    <div class="bni" id="bni-report" onclick="nav('report')">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+      <span>Report</span>
+    </div>
+  </nav>
 
 <!-- FULLSCREEN DETAIL -->
 <div class="fsd" id="fsd">
