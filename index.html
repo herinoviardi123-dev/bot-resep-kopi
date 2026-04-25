@@ -1958,7 +1958,7 @@ function printStruk(){
   const win=window.open('','_blank','width=300,height=600');
   const css='body{font-family:\'Courier New\',monospace;font-size:11px;color:#000;margin:0;padding:8px;width:58mm}.sr{display:flex;justify-content:space-between;margin:2px 0}.sl{border-top:1px dashed #333;margin:6px 0}h3{text-align:center;margin:0 0 4px;font-size:13px}.stt{font-weight:700;font-size:12px}@media print{body{width:58mm}}';
   const scriptTag='<scri'+'pt>window.onload=function(){window.print();setTimeout(function(){window.close();},800);}</scri'+'pt>';
-  win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Struk '+namaToko+'</title><style>'+css+'</style></head><body>'+content.outerHTML+scriptTag+'</body></html>');
+  win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Struk '+namaToko+'</title><style>'+css+'</style></'+'head><bo'+'dy>'+content.outerHTML+scriptTag+'</'+'body></'+'html>');
   win.document.close();
 }
 
