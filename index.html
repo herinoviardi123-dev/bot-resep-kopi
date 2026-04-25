@@ -803,13 +803,13 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--bg);
 <!-- Failsafe: paksa dismiss splash setelah 6 detik -->
 <script>
 // Clear old SW caches on first load of new version
-var APP_VER='v31';
+var APP_VER='v34';
 if(localStorage.getItem('hk_appver')!==APP_VER){
   localStorage.setItem('hk_appver',APP_VER);
   if('caches' in window){
     caches.keys().then(function(names){
       names.forEach(function(n){
-        if(!n.includes('v26')) caches.delete(n);
+        if(!n.includes('v34')) caches.delete(n);
       });
     });
   }
@@ -1410,6 +1410,7 @@ setTimeout(function(){
 <!-- TOAST -->
 <div class="toast" id="toastEl"></div>
 
+
 <script>
 /* ══════════════════════════════════════
    HEY KOPI — v34  (full feature)
@@ -1920,7 +1921,15 @@ function cetakStruk(items,subtotal,diskon,total,bayar,kembalian,metode,note,tgl)
   </div>`;
   const modal=document.createElement('div');modal.className='struk-modal';modal.innerHTML=`<div style="background:var(--bg);border-radius:var(--r);box-shadow:var(--nm-sm);padding:16px;max-width:280px;width:100%">${struks}<div class="struk-acts"><button class="btn gold" style="flex:2;margin-top:0;padding:10px" onclick="printStruk()">🖨 Print</button><button class="btn ghost" style="flex:1;margin-top:0;padding:10px;font-size:12px" onclick="this.closest('.struk-modal').remove()">✕ Tutup</button></div></div>`;document.body.appendChild(modal);modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
 }
-function printStruk(){const content=document.getElementById('struk-content');if(!content)return;const win=window.open('','_blank','width=300,height=600');win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Struk</title><style>body{font-family:'Courier New',monospace;font-size:11px;color:#000;margin:0;padding:8px;width:58mm}.sr{display:flex;justify-content:space-between;margin:2px 0}.sl{border-top:1px dashed #333;margin:6px 0}h3{text-align:center;margin:0 0 4px;font-size:13px}.stt{font-weight:700;font-size:12px}@media print{body{width:58mm}}</style></head><body>${content.outerHTML}<script>window.onload=()=>{window.print();window.close();}<\/script></body></html>`);win.document.close();}
+function printStruk(){
+  const content=document.getElementById('struk-content');
+  if(!content)return;
+  const win=window.open('','_blank','width=300,height=600');
+  const css='body{font-family:\'Courier New\',monospace;font-size:11px;color:#000;margin:0;padding:8px;width:58mm}.sr{display:flex;justify-content:space-between;margin:2px 0}.sl{border-top:1px dashed #333;margin:6px 0}h3{text-align:center;margin:0 0 4px;font-size:13px}.stt{font-weight:700;font-size:12px}@media print{body{width:58mm}}';
+  const scriptTag='<scri'+'pt>window.onload=function(){window.print();setTimeout(function(){window.close();},800);}</scri'+'pt>';
+  win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Struk '+namaToko+'</title><style>'+css+'</style></head><body>'+content.outerHTML+scriptTag+'</body></html>');
+  win.document.close();
+}
 
 function saveProduk(){const nm=(document.getElementById('jpNama')?.value||'').trim();const jenis=document.getElementById('jpJenis')?.value||'botol';const hrg=+(document.getElementById('jpHrg')?.value)||0;const note=(document.getElementById('jpNote')?.value||'').trim();const stokAwal=+(document.getElementById('jpStok')?.value)||0;const editId=document.getElementById('jpEditId')?.value||'';if(!nm){showToast('⚠ Isi nama produk!');return;}if(editId){const idx=produkList.findIndex(p=>p.id===editId);if(idx>=0)produkList[idx]={...produkList[idx],nama:nm,jenis,hrg,note};cancelEditProduk();}else{const newId='m'+Date.now();produkList.push({id:newId,nama:nm,jenis,hrg,note,sumber:'manual'});if(stokAwal>0)addStokProduk(nm,jenis,stokAwal);}saveProdukLS();['jpNama','jpHrg','jpNote','jpStok','jpEditId'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});renderProdukList();renderKasir();showToast('✅ Produk disimpan!');}
 function editProduk(id){const p=produkList.find(x=>x.id===id);if(!p)return;const fields={jpNama:p.nama,jpJenis:p.jenis,jpHrg:p.hrg,jpNote:p.note||'',jpEditId:p.id};Object.entries(fields).forEach(([fid,v])=>{const el=document.getElementById(fid);if(el)el.value=v||'';});const title=document.getElementById('jprod-title');if(title)title.textContent='✏ Edit Produk';const cancel=document.getElementById('jpCancelEdit');if(cancel)cancel.style.display='block';}
