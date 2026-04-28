@@ -1,5 +1,1 @@
-# Hey Kopi PWA — Netlify Redirects
-# SPA fallback: all routes serve index.html
-/*    /index.html   200
-
-# Security headers handled in netlify.toml
+/* /index.html 200
