@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Hey Kopi v35</title>
+<title>Hey Kopi v36</title>
 <meta name="application-name" content="Hey Kopi">
 <meta name="description" content="Aplikasi Resep & Kalkulator Kopi dari Gayo Highland">
 <link rel="manifest" href="/manifest.json">
@@ -987,12 +987,18 @@ body{
       </div>
       <!-- LOG -->
       <div id="jv-log" style="display:none">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
           <div style="font-size:13px;font-weight:700;color:var(--ink)">Log Penjualan</div>
           <div style="display:flex;gap:6px">
-            <button class="lab" onclick="shareLog('jual','wa')">💬 WA</button>
-            <button class="lab" onclick="shareLog('jual','tg')">✈ TG</button>
+            <button class="lab" onclick="shareLog('jual','wa')">💬</button>
+            <button class="lab" onclick="shareLog('jual','tg')">✈</button>
           </div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;align-items:center">
+          <input type="date" id="jual-from" class="cri" style="flex:1;font-size:11px" onchange="renderJual()">
+          <span style="font-size:11px;color:var(--mut)">s/d</span>
+          <input type="date" id="jual-to" class="cri" style="flex:1;font-size:11px" onchange="renderJual()">
+          <button class="lab" onclick="document.getElementById('jual-from').value='';document.getElementById('jual-to').value='';renderJual()">Hari Ini</button>
         </div>
         <div id="jlist"></div>
       </div>
@@ -1037,12 +1043,18 @@ body{
           <button class="btn gold" onclick="addPen()">✅ Catat Pembelian</button>
         </div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;margin-top:4px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;margin-top:4px">
         <div style="font-size:13px;font-weight:700;color:var(--ink)">Riwayat Pembelian</div>
         <div style="display:flex;gap:6px">
-          <button class="lab" onclick="shareLog('pen','wa')">💬 WA</button>
-          <button class="lab" onclick="shareLog('pen','tg')">✈ TG</button>
+          <button class="lab" onclick="shareLog('pen','wa')">💬</button>
+          <button class="lab" onclick="shareLog('pen','tg')">✈</button>
         </div>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:10px;align-items:center">
+        <input type="date" id="pen-from" class="cri" style="flex:1;font-size:11px" onchange="renderPen()">
+        <span style="font-size:11px;color:var(--mut)">s/d</span>
+        <input type="date" id="pen-to" class="cri" style="flex:1;font-size:11px" onchange="renderPen()">
+        <button class="lab" onclick="document.getElementById('pen-from').value='';document.getElementById('pen-to').value='';renderPen()">Hari Ini</button>
       </div>
       <div id="plist"></div>
     </div></div>
@@ -1057,10 +1069,10 @@ body{
       <div style="display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none" id="ctabrow"></div>
       <div class="crud-card" style="margin-bottom:10px">
         <div class="crud-row" style="margin-bottom:8px">
-          <input class="cri" style="flex:2" id="cunama" placeholder="Nama resep">
-          <button id="cujenB" onclick="setCuJenis('botol')" style="flex:1;padding:10px 4px;border-radius:var(--r3);font-size:11px;font-weight:600;border:none;cursor:pointer;font-family:'Outfit',sans-serif;background:var(--bg);box-shadow:var(--nm-pressed);color:var(--gold);transition:all .2s">📦 Botol</button>
-          <button id="cujenC" onclick="setCuJenis('cup')" style="flex:1;padding:10px 4px;border-radius:var(--r3);font-size:11px;font-weight:600;border:none;cursor:pointer;font-family:'Outfit',sans-serif;background:var(--bg);box-shadow:var(--nm-sm);color:var(--mut);transition:all .2s">🧊 Cup</button>
+          <input class="cri" style="flex:1" id="cunama" placeholder="Nama resep">
         </div>
+        <input type="hidden" id="cujenB" value="botol">
+        <input type="hidden" id="cujenC" value="cup">
         <div style="font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Daftar Bahan</div>
         <div id="cblist"></div>
         <button class="btn ghost" style="margin-top:8px" onclick="addCB()">+ Tambah Bahan</button>
@@ -1108,7 +1120,7 @@ body{
         <div class="phav"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
         <div class="phn" id="about-toko-display">Hey Kopi</div>
         <div class="phs">Aplikasi Resep & Manajemen Kopi</div>
-        <div class="phv">v35 · Gayo Highland</div>
+        <div class="phv">v36 · Gayo Highland</div>
       </div>
       <div class="crud-card" style="margin-bottom:12px">
         <div class="crud-t">🏪 Nama Toko</div>
@@ -1240,7 +1252,7 @@ body{
 
 <script>
 // SW cache clear
-var APP_VER='v35';
+var APP_VER='v36';
 if(localStorage.getItem('hk_appver')!==APP_VER){
   localStorage.setItem('hk_appver',APP_VER);
   if('caches' in window){
@@ -1258,7 +1270,8 @@ setTimeout(function(){
 },6000);
 </script>
 <script>
-/* HEY KOPI v35 */
+
+/* HEY KOPI v36 */
 
 
 /* ══════════════════════════════════════
@@ -1288,11 +1301,289 @@ const scalB=(r,ml,q)=>r.b250.map(b=>({...b,v:Math.round(b.v*(ml/250)*q)}));
 const scalC=(r,q)=>r.bc.map(b=>({...b,v:Math.round(b.v*q)}));
 
 /* ── DATA RESEP KOPI 20 ─────────────── */
-const DK={'☕ Kopi Populer':[{n:'Es Kopi Susu Gula Aren',em:'🥛',tag:'Best Seller',wkt:'5 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Susu',v:'130ml'},{n:'Gula Aren',v:'45ml'}],step:['Campur espresso+gula aren','Tuang susu ke gelas berisi es','Kocok sebelum minum']},{n:'Dalgona Coffee',em:'🍮',tag:'Viral',wkt:'10 mnt',porsi:'250ml',bahan:[{n:'Kopi Instan',v:'15gr'},{n:'Gula',v:'15gr'},{n:'Air Panas',v:'15ml'},{n:'Susu Dingin',v:'205ml'}],step:['Kocok kopi+gula+air panas dengan mixer hingga creamy','Tuang susu+es ke gelas','Letakkan kopi kocok di atas']},{n:'Cold Brew Lemonade',em:'🍋',tag:'Segar',wkt:'5 mnt',porsi:'250ml',bahan:[{n:'Cold Brew',v:'80ml'},{n:'Air Soda',v:'100ml'},{n:'Air Lemon',v:'40ml'},{n:'Gula Aren',v:'30ml'}],step:['Larutkan gula aren+lemon','Masukkan es','Tuang cold brew lalu soda']},{n:'Kopi Pandan Latte',em:'🌿',tag:'Aromatik',wkt:'5 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Susu',v:'150ml'},{n:'Sirup Pandan',v:'30ml'}],step:['Campur sirup pandan+espresso','Tuang susu+es']},{n:'Dirty Matcha',em:'🍵',tag:'Unik',wkt:'7 mnt',porsi:'250ml',bahan:[{n:'Matcha',v:'8gr'},{n:'Susu',v:'150ml'},{n:'Espresso',v:'30ml'}],step:['Larutkan matcha+gula','Tuang susu+es','Tuang espresso di atas']}],'🌟 Kopi Spesial':[{n:'Affogato Float',em:'🍨',tag:'Istimewa',wkt:'5 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Es Krim Vanila',v:'2 scoop'},{n:'Karamel',v:'10ml'}],step:['Masukkan es krim ke gelas','Siram espresso panas di atas','Drizzle karamel']},{n:'Kopi Kurma',em:'🌴',tag:'Natural',wkt:'8 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Susu',v:'150ml'},{n:'Pasta Kurma',v:'40ml'}],step:['Blend kurma jadi pasta','Campur dengan espresso','Tambah susu+es']},{n:'Sea Salt Coffee',em:'🧂',tag:'Savory',wkt:'8 mnt',porsi:'250ml',bahan:[{n:'Kopi Hitam',v:'100ml'},{n:'Susu',v:'100ml'},{n:'Krim+Garam',v:'35ml'}],step:['Buat kopi hitam','Kocok krim+garam','Tuang krim di atas']},{n:'Butterscotch Coffee',em:'🧈',tag:'Buttery',wkt:'6 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Butterscotch',v:'35ml'},{n:'Susu',v:'155ml'}],step:['Campur butterscotch+espresso','Tambah susu+es']},{n:'Caramel Macchiato',em:'🍯',tag:'Classic',wkt:'7 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Vanilla Syrup',v:'15ml'},{n:'Susu',v:'155ml'},{n:'Karamel',v:'20ml'}],step:['Tuang vanilla+susu+es','Tuang espresso','Drizzle karamel']}],'☕ Kopi Klasik':[{n:'Hazelnut Latte',em:'🌰',tag:'Nutty',wkt:'6 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Hazelnut Syrup',v:'25ml'},{n:'Susu',v:'165ml'}],step:['Hazelnut+espresso','Tambah susu+es']},{n:'Iced Latte',em:'🧊',tag:'Classic',wkt:'5 mnt',porsi:'300ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Susu Dingin',v:'180ml'}],step:['Isi gelas dengan es','Tuang susu','Tuang espresso']},{n:'Vanilla Latte',em:'🌼',tag:'Sweet',wkt:'6 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Vanilla Syrup',v:'20ml'},{n:'Susu',v:'170ml'}],step:['Campur vanilla+espresso','Tambah susu+es']},{n:'Mocha Latte',em:'🍫',tag:'Choco',wkt:'7 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Coklat Syrup',v:'30ml'},{n:'Susu',v:'160ml'}],step:['Campur coklat+espresso','Tambah susu+es']},{n:'Brown Sugar Latte',em:'🤎',tag:'Trending',wkt:'6 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Gula Merah',v:'40ml'},{n:'Susu',v:'150ml'}],step:['Campur espresso+gula merah','Tuang susu+es']}],'🌙 Kekinian':[{n:'Kopi Susu Keju',em:'🧀',tag:'Cheese Foam',wkt:'10 mnt',porsi:'250ml',bahan:[{n:'Kopi Hitam',v:'120ml'},{n:'Cream Cheese Foam',v:'40ml'},{n:'Susu',v:'80ml'}],step:['Buat kopi+susu+es','Kocok cream cheese foam','Tuang foam di atas']},{n:'Iced Americano',em:'☕',tag:'Bold',wkt:'5 mnt',porsi:'300ml',bahan:[{n:'Espresso Double',v:'60ml'},{n:'Air Dingin',v:'180ml'}],step:['Isi gelas es','Tuang air dingin','Tuang espresso']},{n:'Rose Latte',em:'🌹',tag:'Floral',wkt:'6 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Susu',v:'150ml'},{n:'Sirup Rose',v:'30ml'}],step:['Campur rose+espresso','Tambah susu+es']},{n:'Lavender Latte',em:'💜',tag:'Calming',wkt:'7 mnt',porsi:'250ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Susu',v:'155ml'},{n:'Sirup Lavender',v:'25ml'}],step:['Campur lavender+espresso','Tambah susu+es']},{n:'Kopi Kelapa Muda',em:'🥥',tag:'Tropical',wkt:'7 mnt',porsi:'300ml',bahan:[{n:'Espresso',v:'60ml'},{n:'Air Kelapa',v:'150ml'},{n:'Santan',v:'40ml'},{n:'Gula Aren',v:'25ml'}],step:['Campur espresso+gula aren','Tambah air kelapa+es','Tuang santan di atas']}]};
-const DNC={'🍵 Teh & Herbal':[{n:'Es Teh Manis',em:'🍵',tag:'Classic',wkt:'5 mnt',porsi:'300ml',bahan:[{n:'Teh Celup',v:'2 kantong'},{n:'Gula',v:'3 sdm'}],step:['Seduh teh 3-5 menit','Tambah gula','Tuang ke gelas es']},{n:'Thai Tea',em:'🧡',tag:'Creamy',wkt:'8 mnt',porsi:'300ml',bahan:[{n:'Teh Thai',v:'15gr'},{n:'Susu Kental',v:'40ml'}],step:['Seduh teh, saring','Tuang ke gelas es','Tuang susu kental']},{n:'Lemon Tea',em:'🍋',tag:'Refreshing',wkt:'5 mnt',porsi:'300ml',bahan:[{n:'Teh',v:'200ml'},{n:'Air Lemon',v:'30ml'},{n:'Gula',v:'2 sdm'}],step:['Buat teh manis','Peras lemon','Campur, tuang ke gelas es']},{n:'Lychee Tea',em:'🍈',tag:'Fruity',wkt:'6 mnt',porsi:'300ml',bahan:[{n:'Teh Hitam',v:'150ml'},{n:'Sirup Lychee',v:'40ml'},{n:'Air Soda',v:'80ml'}],step:['Buat teh pekat','Campur sirup','Tuang ke gelas es, tambah soda']},{n:'Jasmine Tea',em:'🌸',tag:'Floral',wkt:'5 mnt',porsi:'300ml',bahan:[{n:'Teh Jasmine',v:'2 kantong'},{n:'Madu',v:'1 sdm'}],step:['Seduh 3 menit','Tambah madu','Tuang ke gelas es']}],'🥛 Susu & Creamy':[{n:'Matcha Latte',em:'🍵',tag:'Matcha',wkt:'5 mnt',porsi:'250ml',bahan:[{n:'Matcha',v:'8gr'},{n:'Susu',v:'177ml'},{n:'Gula',v:'15gr'}],step:['Larutkan matcha','Tambah susu+es']},{n:'Taro Latte',em:'🟣',tag:'Purple',wkt:'6 mnt',porsi:'250ml',bahan:[{n:'Bubuk Taro',v:'30gr'},{n:'Susu',v:'185ml'}],step:['Larutkan bubuk taro','Tambah susu+es']},{n:'Chocolate Milk',em:'🍫',tag:'Classic',wkt:'5 mnt',porsi:'250ml',bahan:[{n:'Coklat Bubuk',v:'20gr'},{n:'Susu',v:'205ml'}],step:['Larutkan coklat','Tambah susu+es']},{n:'Red Velvet Latte',em:'❤️',tag:'Red',wkt:'6 mnt',porsi:'250ml',bahan:[{n:'Red Velvet Syrup',v:'40ml'},{n:'Susu',v:'180ml'}],step:['Campur syrup+susu hangat','Tuang ke gelas es']},{n:'Strawberry Milk',em:'🍓',tag:'Pink',wkt:'5 mnt',porsi:'250ml',bahan:[{n:'Sirup Strawberry',v:'40ml'},{n:'Susu Dingin',v:'180ml'}],step:['Tuang sirup ke gelas','Tambah es','Tuang susu perlahan']}],'🍓 Minuman Buah':[{n:'Jus Alpukat',em:'🥑',tag:'Creamy',wkt:'8 mnt',porsi:'300ml',bahan:[{n:'Alpukat',v:'1 buah'},{n:'Susu',v:'150ml'},{n:'Gula',v:'2 sdm'}],step:['Blender alpukat+susu+gula+es']},{n:'Jus Mangga',em:'🥭',tag:'Tropical',wkt:'8 mnt',porsi:'300ml',bahan:[{n:'Mangga',v:'2 buah'},{n:'Air',v:'100ml'}],step:['Kupas mangga','Blender dengan air+es']},{n:'Lemon Squash',em:'🍋',tag:'Segar',wkt:'5 mnt',porsi:'300ml',bahan:[{n:'Lemon',v:'2 buah'},{n:'Air Soda',v:'200ml'},{n:'Gula',v:'30ml'}],step:['Peras lemon','Campur gula','Tuang soda+es']},{n:'Watermelon Juice',em:'🍉',tag:'Summer',wkt:'5 mnt',porsi:'300ml',bahan:[{n:'Semangka',v:'300gr'},{n:'Gula',v:'1 sdm'}],step:['Blender semangka','Tambah gula','Tuang ke gelas es']},{n:'Es Buah Segar',em:'🍇',tag:'Mix',wkt:'10 mnt',porsi:'400ml',bahan:[{n:'Buah Campur',v:'200gr'},{n:'Sirup Merah',v:'30ml'},{n:'Santan',v:'50ml'}],step:['Potong buah','Masukkan+es','Siram sirup+santan']}],'🧃 Soda & Spesial':[{n:'Blue Ocean Soda',em:'🌊',tag:'Instagram',wkt:'5 mnt',porsi:'300ml',bahan:[{n:'Sirup Biru',v:'30ml'},{n:'Air Soda',v:'200ml'},{n:'Lemon',v:'20ml'}],step:['Tuang sirup ke gelas','Tambah es','Peras lemon','Tuang soda']},{n:'Mocktail Sunrise',em:'🌅',tag:'Colorful',wkt:'8 mnt',porsi:'300ml',bahan:[{n:'Jus Jeruk',v:'150ml'},{n:'Sirup Grenadine',v:'20ml'},{n:'Air Soda',v:'100ml'}],step:['Isi gelas+es','Tuang jus jeruk','Tuang soda','Teteskan grenadine di tepi']},{n:'Yakult Soda',em:'🥛',tag:'Trending',wkt:'3 mnt',porsi:'250ml',bahan:[{n:'Yakult',v:'2 botol'},{n:'Air Soda',v:'150ml'}],step:['Isi gelas+es','Tuang yakult+soda']},{n:'Brown Sugar Boba',em:'🧋',tag:'Boba',wkt:'20 mnt',porsi:'400ml',bahan:[{n:'Tapioka',v:'80gr'},{n:'Gula Merah',v:'40ml'},{n:'Susu',v:'200ml'}],step:['Rebus tapioka, rendam gula merah','Masukkan ke gelas','Tuang susu+es']},{n:'Es Kelapa Muda',em:'🥥',tag:'Natural',wkt:'5 mnt',porsi:'350ml',bahan:[{n:'Air Kelapa',v:'200ml'},{n:'Daging Kelapa',v:'50gr'}],step:['Masukkan es','Tuang air kelapa','Tambah daging kelapa']}]};
+/* ═══════════════════════════════════════════
+   HEY KOPI v36 — PATCH DATA & FEATURES
+   Apply over v35_js_base.js
+═══════════════════════════════════════════ */
 
-/* ── INFO (20) & BREW (9) ─ same as v33 ─ */
-const DOKUMEN=[{nm:'Asal Mula Kopi',ic:'globe',b:`<p>Kopi berasal dari <b>Ethiopia</b>. Penggembala Kaldi menemukan kambingnya bersemangat setelah makan biji kopi. Arabika Gayo dari Aceh Tengah ditanam di ketinggian 1200–1500 mdpl.</p>`},{nm:'Arabika vs Robusta',ic:'coffee',b:`<h4>Arabika</h4><ul><li>Dataran tinggi >1000 mdpl · Asam buah, floral · Kafein ~1.2%</li></ul><h4>Robusta</h4><ul><li>Dataran rendah · Kuat, pahit · Kafein ~2.5%</li></ul>`},{nm:'Level Roasting Kopi',ic:'flame',b:`<ul><li><b>Light:</b> Asam tinggi, floral, fruity</li><li><b>Medium:</b> Seimbang, caramel, nutty</li><li><b>Medium-Dark:</b> Bold, dark chocolate</li><li><b>Dark:</b> Pahit, smoky</li></ul>`},{nm:'Proses Pasca Panen',ic:'leaf',b:`<ul><li><b>Natural:</b> Fruity, wine-like</li><li><b>Washed:</b> Bersih, asam cerah</li><li><b>Honey:</b> Manis, balanced</li><li><b>Wet-Hulled:</b> Earthy, body berat (khas Gayo)</li></ul>`},{nm:'Cara Membuat Cold Brew',ic:'coffee',b:`<ul><li>Rasio kopi:air = 1:10</li><li>Giling kasar, simpan di kulkas 12–24 jam</li><li>Saring, simpan max 2 minggu</li><li>Sajikan encerkan 1:1 dengan air/susu</li></ul>`},{nm:'Tips Hitung Harga Jual',ic:'rp',b:`<p><b>HPP ÷ (1 - Margin%)</b> = Harga Jual</p><p>Contoh: HPP Rp 8.000 · Margin 50% → Harga Jual Rp 16.000</p><p>Target food cost maksimal 30%.</p>`},{nm:'Tips Jualan Kopi Botol',ic:'bottle',b:`<ul><li>Modal kecil Rp 1–5 juta</li><li>Botol kaca/PET food-grade</li><li>Shelf life 3–5 hari di kulkas</li><li>Harga jual Rp 12.000–25.000/250ml</li><li>Margin minimal 50%</li></ul>`},{nm:'Tips Mengelola Bisnis Kopi',ic:'chart',b:`<ul><li>Catat pemasukan & pengeluaran harian</li><li>Hitung HPP sebelum menetapkan harga jual</li><li>Target food cost ≤30%</li><li>Evaluasi menu bulanan</li></ul>`},{nm:'Cara Membuat Latte Art',ic:'coffee',b:`<ul><li>Steam susu hingga microfoam 60–65°C</li><li>Atur sudut cangkir 45°</li><li>Tuang dari ketinggian 5cm</li><li>Susu full cream menghasilkan foam terbaik</li></ul>`},{nm:'Mengenal Gula Aren',ic:'leaf',b:`<p>GI rendah 35 vs gula pasir GI 65. Rasa karamel khas. Alternatif: madu, stevia, kurma.</p>`},{nm:'Tips Packaging Kopi Botol',ic:'bottle',b:`<ul><li>Botol kaca → kesan premium</li><li>Label menarik meningkatkan nilai jual 30–50%</li><li>Cantumkan tanggal produksi & kadaluarsa</li></ul>`},{nm:'Kafein: Batas Aman',ic:'zap',b:`<p>Batas aman: <b>400mg/hari</b>. Espresso 60ml: ~64mg · Cold brew 250ml: ~150mg</p>`},{nm:'Alat Seduh Kopi Manual',ic:'tool',b:`<ul><li><b>V60:</b> Jernih, menonjolkan karakter</li><li><b>French Press:</b> Full body, berminyak</li><li><b>AeroPress:</b> Fleksibel, cepat</li><li><b>Moka Pot:</b> Stovetop, ekonomis</li></ul>`},{nm:'Tips Branding Bisnis Kopi',ic:'star',b:`<ul><li>Nama brand mudah diingat & unik</li><li>Konsistensi warna & desain</li><li>Konten behind the scenes di IG/TikTok</li></ul>`},{nm:'Teknik Ekstraksi Espresso',ic:'settings',b:`<ul><li>Dosis: 18gr · Yield: 36ml · Waktu: 25-30 dtk · Suhu: 90-94°C · Tekanan: 9 bar</li></ul>`},{nm:'Mitos vs Fakta Kopi',ic:'globe',b:`<h4>MITOS ❌</h4><ul><li>Kopi bikin stunting · Kopi harus panas</li></ul><h4>FAKTA ✅</h4><ul><li>Kopi mengandung antioksidan tinggi · Cold brew lebih rendah asam</li></ul>`},{nm:'Potensi Pasar Kopi Indonesia',ic:'map',b:`<ul><li>Produsen ke-4 terbesar dunia</li><li>Konsumsi naik 8.2%/tahun</li><li>Kopi botolan tumbuh 25%/tahun</li></ul>`},{nm:'Cara Menyimpan Biji Kopi',ic:'box',b:`<ul><li>Wadah kedap udara, sejuk & gelap</li><li>Jangan di kulkas (menyerap aroma)</li><li>Best before: 4 minggu setelah roasting</li></ul>`},{nm:'Fermentasi untuk Cold Brew',ic:'leaf',b:`<ul><li>Air filtered untuk hasil terbaik</li><li>Suhu kulkas 3–5°C ideal</li><li>Cupping test setiap 6 jam</li></ul>`},{nm:'Tren Kopi 2024–2025',ic:'star',b:`<ul><li>☕ Kopi susu gula aren #1 · 🌿 Kopi pandan · 🧂 Sea salt · 🍋 Cold brew lemonade · 🌱 Plant-based milk</li></ul>`}];
+/* ── 40 RESEP KOPI (replace DK) ─────────── */
+const DK={
+'☕ Kopi Populer':[
+  {n:'Es Kopi Susu Gula Aren',em:'🥛',tag:'Best Seller',wkt:'5 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Susu Segar',v:'130 ml'},{n:'Gula Aren Cair',v:'45 ml'},{n:'Garam',v:'1 gr'}],
+   step:['Campur espresso+gula aren, aduk merata','Siapkan gelas berisi es batu','Tuang susu segar ke gelas','Tuang campuran espresso, kocok sebelum minum']},
+  {n:'Dalgona Coffee',em:'🍮',tag:'Viral',wkt:'10 mnt',porsi:'250ml',
+   bahan:[{n:'Kopi Instan',v:'15 gr'},{n:'Gula',v:'15 gr'},{n:'Air Panas',v:'15 ml'},{n:'Susu Dingin',v:'205 ml'}],
+   step:['Kocok kopi instan+gula+air panas dengan mixer 3-5 menit hingga creamy berbusa','Isi gelas dengan es batu','Tuang susu dingin ke gelas','Letakkan kopi kocok di atas susu']},
+  {n:'Cold Brew Lemonade',em:'🍋',tag:'Segar',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Cold Brew',v:'80 ml'},{n:'Air Soda',v:'100 ml'},{n:'Air Lemon',v:'40 ml'},{n:'Gula Aren',v:'30 ml'}],
+   step:['Larutkan gula aren cair dengan air lemon','Isi gelas dengan es batu','Tuang cold brew ke gelas','Tuang campuran lemon-gula, aduk perlahan','Tuang air soda terakhir']},
+  {n:'Kopi Pandan Latte',em:'🌿',tag:'Aromatik',wkt:'5 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Susu Segar',v:'150 ml'},{n:'Sirup Pandan',v:'30 ml'},{n:'Gula',v:'10 gr'}],
+   step:['Campur sirup pandan dengan espresso panas, aduk rata','Isi gelas dengan es batu','Tuang susu segar ke gelas','Tuang campuran pandan-espresso di atas']},
+  {n:'Dirty Matcha',em:'🍵',tag:'Unik',wkt:'7 mnt',porsi:'250ml',
+   bahan:[{n:'Matcha Powder',v:'8 gr'},{n:'Air Panas 70°C',v:'30 ml'},{n:'Susu',v:'150 ml'},{n:'Espresso',v:'30 ml'},{n:'Gula',v:'15 gr'}],
+   step:['Ayak matcha, larutkan dengan air panas 70°C dan gula','Aduk rata dengan whisk hingga tidak bergerindil','Isi gelas dengan es batu dan tuang susu','Tuang espresso di atas (jangan diaduk dulu untuk efek "dirty")']},
+  {n:'Caramel Macchiato',em:'🍯',tag:'Sweet',wkt:'7 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Vanilla Syrup',v:'15 ml'},{n:'Susu',v:'155 ml'},{n:'Karamel Syrup',v:'20 ml'}],
+   step:['Tuang vanilla syrup ke gelas berisi es','Tuang susu segar ke gelas','Tuang espresso di atas susu','Drizzle karamel syrup di paling atas']},
+  {n:'Kopi Kurma',em:'🌴',tag:'Natural',wkt:'8 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Susu Segar',v:'150 ml'},{n:'Pasta Kurma',v:'40 ml'},{n:'Kayu Manis',v:'1 gr'}],
+   step:['Blend 5-6 kurma matang dengan sedikit air hingga jadi pasta halus','Campur pasta kurma dengan espresso panas, aduk merata','Isi gelas dengan es dan tuang susu','Tuang campuran espresso-kurma, taburi kayu manis']},
+  {n:'Sea Salt Coffee',em:'🧂',tag:'Savory',wkt:'8 mnt',porsi:'250ml',
+   bahan:[{n:'Kopi Hitam Pekat',v:'100 ml'},{n:'Susu Full Cream',v:'100 ml'},{n:'Krim Kental Manis',v:'35 ml'},{n:'Garam Laut',v:'2 gr'},{n:'Gula Pasir',v:'10 gr'}],
+   step:['Buat kopi hitam pekat (drip/tubruk)','Kocok krim kental+garam laut+gula hingga mengembang (2 menit)','Tuang kopi hitam+susu+es ke gelas','Tuang sea salt cream di atas, jangan diaduk']},
+  {n:'Hazelnut Latte',em:'🌰',tag:'Nutty',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Hazelnut Syrup',v:'25 ml'},{n:'Susu',v:'165 ml'}],
+   step:['Tuang hazelnut syrup ke gelas berisi es','Tambahkan espresso, aduk rata dengan syrup','Tuang susu segar perlahan ke gelas']},
+  {n:'Butterscotch Coffee',em:'🧈',tag:'Buttery',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Butterscotch Syrup',v:'35 ml'},{n:'Susu Full Cream',v:'155 ml'}],
+   step:['Campur butterscotch syrup dengan espresso panas, aduk merata','Isi gelas dengan es batu','Tuang susu segar','Tuang campuran butterscotch-espresso']},
+],
+'🌟 Kopi Spesial':[
+  {n:'Affogato Float',em:'🍨',tag:'Istimewa',wkt:'5 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso Double Shot',v:'60 ml'},{n:'Es Krim Vanila',v:'2 scoop'},{n:'Karamel Syrup',v:'10 ml'}],
+   step:['Taruh 2 scoop es krim vanila ke dalam gelas/mangkuk','Siram espresso panas langsung di atas es krim','Drizzle karamel, sajikan segera sebelum meleleh']},
+  {n:'Kopi Susu Keju',em:'🧀',tag:'Cheese Foam',wkt:'10 mnt',porsi:'250ml',
+   bahan:[{n:'Kopi Hitam',v:'120 ml'},{n:'Cream Cheese',v:'30 gr'},{n:'Susu Full Cream',v:'80 ml'},{n:'Gula Pasir',v:'1 sdm'}],
+   step:['Buat kopi hitam pekat, dinginkan dengan es','Kocok cream cheese+susu+gula dengan mixer hingga foam halus','Tuang kopi+es ke gelas tinggi','Tuang cheese foam di atas, sajikan dengan sedotan']},
+  {n:'Rose Latte',em:'🌹',tag:'Floral',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Susu',v:'150 ml'},{n:'Sirup Rose',v:'30 ml'}],
+   step:['Campur sirup rose dengan espresso panas','Isi gelas dengan es batu','Tuang susu segar','Tuang campuran rose-espresso perlahan']},
+  {n:'Lavender Latte',em:'💜',tag:'Calming',wkt:'7 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Susu',v:'155 ml'},{n:'Sirup Lavender',v:'25 ml'}],
+   step:['Campur sirup lavender+espresso, aduk merata','Isi gelas dengan es batu','Tuang susu segar ke gelas','Tuang campuran lavender-espresso, aduk perlahan']},
+  {n:'Kopi Kelapa Muda',em:'🥥',tag:'Tropical',wkt:'7 mnt',porsi:'300ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Air Kelapa Segar',v:'150 ml'},{n:'Santan Kental',v:'40 ml'},{n:'Gula Aren',v:'25 ml'}],
+   step:['Campur espresso dengan gula aren cair, aduk rata','Isi gelas dengan es batu','Tuang air kelapa segar','Tuang campuran espresso-gula aren','Tuang santan di atas perlahan']},
+  {n:'Brown Sugar Latte',em:'🤎',tag:'Trending',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Gula Merah Cair',v:'40 ml'},{n:'Susu',v:'150 ml'}],
+   step:['Larutkan gula merah dengan sedikit air panas','Campur gula merah dengan espresso, aduk rata','Isi gelas dengan es batu','Tuang susu segar, lalu tuang campuran espresso']},
+  {n:'Iced Americano',em:'☕',tag:'Bold',wkt:'4 mnt',porsi:'300ml',
+   bahan:[{n:'Espresso Double',v:'60 ml'},{n:'Air Dingin',v:'200 ml'}],
+   step:['Isi gelas tinggi dengan es batu','Tuang air dingin ke gelas','Tuang espresso di atas air (jangan diaduk untuk efek gradasi)']},
+  {n:'Vanilla Latte',em:'🌼',tag:'Classic Sweet',wkt:'5 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Vanilla Syrup',v:'20 ml'},{n:'Susu',v:'170 ml'}],
+   step:['Campur vanilla syrup dengan espresso panas','Isi gelas dengan es batu','Tuang susu segar','Tuang campuran vanilla-espresso']},
+  {n:'Kopi Salted Caramel',em:'🥨',tag:'Bold Sweet',wkt:'8 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Caramel Syrup',v:'30 ml'},{n:'Susu',v:'140 ml'},{n:'Garam Laut',v:'1 gr'},{n:'Whipped Cream',v:'2 sdm'}],
+   step:['Campur caramel syrup+garam laut+espresso, aduk rata','Tuang susu+es ke gelas','Tuang campuran espresso','Tambahkan whipped cream di atas, drizzle caramel']},
+  {n:'Mocha Latte',em:'🍫',tag:'Chocolatey',wkt:'7 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Coklat Syrup',v:'30 ml'},{n:'Susu',v:'160 ml'}],
+   step:['Campur coklat syrup dengan espresso panas, aduk hingga larut','Isi gelas dengan es batu','Tuang susu segar','Tuang campuran mocha-espresso']},
+],
+'🌙 Kopi Kekinian':[
+  {n:'Iced Latte',em:'🧊',tag:'Classic',wkt:'4 mnt',porsi:'300ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Susu Dingin',v:'200 ml'}],
+   step:['Isi gelas tinggi dengan banyak es batu','Tuang susu dingin ke gelas','Tuang espresso di atas susu perlahan']},
+  {n:'Oat Milk Latte',em:'🌾',tag:'Plant Based',wkt:'5 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Oat Milk',v:'180 ml'},{n:'Madu',v:'1 sdm'}],
+   step:['Panaskan oat milk, kocok hingga berbusa ringan','Tambahkan madu ke espresso, aduk rata','Tuang oat milk ke gelas berisi es','Tuang espresso-madu di atas']},
+  {n:'Kopi Susu Pandan',em:'🍃',tag:'Local Fav',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Kopi Hitam',v:'80 ml'},{n:'Susu Kental Manis',v:'30 ml'},{n:'Sirup Pandan',v:'20 ml'},{n:'Susu Segar',v:'100 ml'}],
+   step:['Buat kopi hitam pekat','Campur susu kental manis+sirup pandan di dasar gelas','Isi gelas dengan es batu','Tuang susu segar','Tuang kopi hitam perlahan di atas']},
+  {n:'Espresso Tonic',em:'🫧',tag:'Refreshing',wkt:'4 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Air Tonic',v:'150 ml'},{n:'Es Batu',v:'100 gr'}],
+   step:['Isi gelas tinggi dengan es batu','Tuang air tonic ke gelas (jangan dikocok)','Tuang espresso perlahan di atas tonic','Sajikan segera']},
+  {n:'Kopi Susu Thai',em:'🧡',tag:'Creamy Thai',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Kopi Robusta Pekat',v:'120 ml'},{n:'Susu Kental Manis',v:'40 ml'},{n:'Krimer',v:'20 ml'},{n:'Susu Segar',v:'80 ml'}],
+   step:['Buat kopi robusta pekat dengan saringan Thai drip','Isi gelas dengan es batu','Tuang susu kental manis dan krimer','Tuang susu segar','Tuang kopi panas di atas perlahan']},
+  {n:'Kopi Jelly',em:'🟤',tag:'Fun',wkt:'20 mnt',porsi:'300ml',
+   bahan:[{n:'Kopi Hitam',v:'150 ml'},{n:'Agar-Agar Kopi',v:'100 gr'},{n:'Susu Kental',v:'40 ml'},{n:'Susu Segar',v:'100 ml'}],
+   step:['Buat kopi hitam, campur dengan agar-agar, masak hingga mendidih','Tuang ke loyang, biarkan set lalu potong dadu','Masukkan jelly kopi ke gelas','Tuang susu kental manis di atas','Tuang susu segar, sajikan dingin']},
+  {n:'Kopi Melon',em:'🍈',tag:'Fruity Coffee',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Melon Syrup',v:'30 ml'},{n:'Air Soda',v:'100 ml'},{n:'Susu',v:'60 ml'}],
+   step:['Campur melon syrup dengan espresso','Isi gelas dengan es batu','Tuang susu segar','Tuang campuran espresso-melon','Tuang air soda terakhir, aduk perlahan']},
+  {n:'Kopi Boba Brown Sugar',em:'🧋',tag:'Boba Kopi',wkt:'25 mnt',porsi:'400ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Susu',v:'200 ml'},{n:'Tapioka Pearl',v:'80 gr'},{n:'Gula Merah',v:'40 ml'}],
+   step:['Rebus tapioka 15 menit hingga kenyal, rendam dalam gula merah cair 10 menit','Masukkan boba ke gelas tinggi','Tuang susu+es ke gelas','Tuang espresso di atas']},
+  {n:'Kopi Leci',em:'🍈',tag:'Fruity',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Sirup Leci',v:'30 ml'},{n:'Air Soda',v:'100 ml'},{n:'Es Batu',v:'100 gr'}],
+   step:['Campur sirup leci dengan espresso','Isi gelas dengan es batu','Tuang air soda ke gelas','Tuang campuran espresso-leci di atas']},
+  {n:'Kopi Madu Jahe',em:'🍯',tag:'Herbal',wkt:'8 mnt',porsi:'200ml',
+   bahan:[{n:'Kopi Hitam',v:'100 ml'},{n:'Madu',v:'2 sdm'},{n:'Jahe Segar',v:'3 iris'},{n:'Air Panas',v:'100 ml'}],
+   step:['Rebus jahe iris dengan air hingga mendidih 5 menit','Seduh kopi hitam terpisah','Campur kopi+jahe, tambahkan madu','Sajikan hangat atau dengan es']},
+],
+'🏆 Kopi Signature':[
+  {n:'Hey Kopi Gayo Special',em:'✨',tag:'Signature',wkt:'8 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso Gayo',v:'60 ml'},{n:'Gula Aren Gayo',v:'40 ml'},{n:'Susu Full Cream',v:'130 ml'},{n:'Garam Himalaya',v:'1 gr'}],
+   step:['Gunakan biji kopi Arabika Gayo single origin, ekstrak espresso','Larutkan gula aren Gayo dengan espresso panas','Tambahkan sejumput garam Himalaya, aduk rata','Tuang ke gelas berisi es, tambahkan susu full cream segar']},
+  {n:'Kopi Susu Kelapa Aren',em:'🌴',tag:'Tropical',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Santan Fresh',v:'100 ml'},{n:'Gula Aren',v:'35 ml'},{n:'Air Kelapa',v:'70 ml'}],
+   step:['Kocok santan segar hingga ringan berbusa','Campur gula aren dengan espresso panas','Isi gelas dengan es batu','Tuang air kelapa segar','Tuang campuran espresso-gula aren','Tuang santan di atas perlahan']},
+  {n:'Kopi Rempah Nusantara',em:'🌶️',tag:'Spiced',wkt:'15 mnt',porsi:'200ml',
+   bahan:[{n:'Kopi Arabika',v:'15 gr'},{n:'Kayu Manis',v:'1 batang'},{n:'Cengkeh',v:'3 biji'},{n:'Kapulaga',v:'2 biji'},{n:'Gula Aren',v:'2 sdm'},{n:'Air',v:'200 ml'}],
+   step:['Rebus air dengan kayu manis+cengkeh+kapulaga 10 menit','Seduh kopi dengan air rempah yang sudah disaring','Tambahkan gula aren, aduk rata','Sajikan hangat dengan cinnamon stick']},
+  {n:'Kopi Susu Ubi Ungu',em:'💜',tag:'Purple Vibes',wkt:'10 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Susu',v:'150 ml'},{n:'Pasta Ubi Ungu',v:'40 gr'},{n:'Gula',v:'15 gr'}],
+   step:['Kukus ubi ungu, haluskan dengan sedikit susu hingga jadi pasta','Campur pasta ubi+gula dengan susu hangat, aduk rata','Isi gelas dengan es batu','Tuang campuran ubi-susu','Tuang espresso di atas perlahan']},
+  {n:'Kopi Susu Alpukat',em:'🥑',tag:'Creamy',wkt:'10 mnt',porsi:'300ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Alpukat Matang',v:'½ buah'},{n:'Susu Kental Manis',v:'30 ml'},{n:'Susu Segar',v:'100 ml'}],
+   step:['Blender alpukat matang+susu kental manis+es batu hingga halus creamy','Tuang ke gelas tinggi','Tuang espresso perlahan di atas alpukat blend','Hias dengan irisan alpukat']},
+  {n:'Kopi Susu Stroberi',em:'🍓',tag:'Sweet Pink',wkt:'8 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Sirup Stroberi',v:'30 ml'},{n:'Susu Segar',v:'160 ml'}],
+   step:['Isi gelas dengan es batu','Tuang sirup stroberi ke dasar gelas','Tuang susu segar perlahan','Tuang espresso di atas susu secara perlahan untuk efek gradasi']},
+  {n:'Kopi Karamel Asin',em:'🥨',tag:'Salted Caramel',wkt:'8 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'60 ml'},{n:'Karamel Homemade',v:'35 ml'},{n:'Susu',v:'140 ml'},{n:'Fleur de Sel',v:'sejumput'}],
+   step:['Buat karamel dari gula pasir dipanaskan hingga amber, tambahkan krim dan garam','Campur karamel asin dengan espresso panas','Isi gelas dengan es batu','Tuang susu segar','Tuang campuran karamel-espresso']},
+  {n:'Vietnam Ca Phe Sua Da',em:'🇻🇳',tag:'Vietnamese',wkt:'10 mnt',porsi:'250ml',
+   bahan:[{n:'Kopi Robusta',v:'20 gr'},{n:'Susu Kental Manis',v:'45 ml'},{n:'Air Panas',v:'100 ml'}],
+   step:['Taruh susu kental manis di dasar gelas atau cangkir','Pasang Vietnamese drip filter di atas gelas','Isi filter dengan kopi robusta, padatkan sedikit','Tuang air panas, biarkan menetes 4-5 menit','Aduk rata dengan susu kental, tuang ke gelas berisi es batu']},
+  {n:'Kopi Susu Cheong Fun',em:'🥛',tag:'Hong Kong Style',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Kopi Hitam Pekat',v:'100 ml'},{n:'Teh Hitam Pekat',v:'50 ml'},{n:'Susu Evaporasi',v:'80 ml'},{n:'Susu Kental Manis',v:'20 ml'}],
+   step:['Buat kopi hitam pekat dan teh hitam pekat terpisah','Campur kopi+teh di gelas (70:30)','Tambahkan susu kental manis, aduk rata','Tuang susu evaporasi di atas','Sajikan dengan es batu atau hangat']},
+  {n:'Kopi Susu Matcha Fusion',em:'🍵',tag:'East Meet West',wkt:'8 mnt',porsi:'250ml',
+   bahan:[{n:'Espresso',v:'30 ml'},{n:'Matcha',v:'5 gr'},{n:'Susu',v:'180 ml'},{n:'Gula',v:'15 gr'}],
+   step:['Larutkan matcha+gula dengan sedikit air panas 70°C','Buat espresso single shot','Isi gelas dengan es batu','Tuang susu segar','Tuang larutan matcha','Tuang espresso di paling atas — 3 lapisan warna!']},
+]};
+
+/* ── 40 RESEP NON KOPI ──────────────────── */
+const DNC={
+'🍵 Teh & Herbal':[
+  {n:'Thai Tea Homemade',em:'🧡',tag:'Creamy Thai',wkt:'10 mnt',porsi:'300ml',
+   bahan:[{n:'Teh Thai (Orange Pekoe)',v:'15 gr'},{n:'Air Panas',v:'200 ml'},{n:'Susu Kental Manis',v:'40 ml'},{n:'Krimer',v:'20 ml'}],
+   step:['Seduh teh Thai dengan air panas 5 menit, saring','Isi gelas dengan es batu','Tuang teh ke gelas','Tuang krimer, lalu susu kental manis perlahan di atas — jangan diaduk dulu']},
+  {n:'Taro Milk Tea',em:'🟣',tag:'Purple Fav',wkt:'8 mnt',porsi:'350ml',
+   bahan:[{n:'Teh Hitam',v:'150 ml'},{n:'Bubuk Taro',v:'30 gr'},{n:'Susu',v:'100 ml'},{n:'Gula',v:'2 sdm'},{n:'Boba',v:'60 gr'}],
+   step:['Seduh teh hitam 3 menit, dinginkan','Rebus boba 15 menit, rendam gula merah','Larutkan bubuk taro dengan susu hangat','Campur taro-susu dengan teh hitam','Masukkan boba ke gelas, tuang campuran teh taro+es']},
+  {n:'Lychee Green Tea',em:'🍈',tag:'Light & Sweet',wkt:'6 mnt',porsi:'300ml',
+   bahan:[{n:'Teh Hijau',v:'150 ml'},{n:'Sirup Leci',v:'40 ml'},{n:'Air Soda',v:'80 ml'},{n:'Leci Kalengan',v:'5 biji'}],
+   step:['Seduh teh hijau 2 menit, jangan terlalu panas — 70°C','Dinginkan teh hijau','Campur sirup leci dengan teh hijau','Isi gelas dengan es dan leci','Tuang campuran teh leci, tambahkan air soda']},
+  {n:'Jasmine Pearl Tea',em:'🌸',tag:'Floral',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Teh Jasmine Pearl',v:'8 gr'},{n:'Air Panas 80°C',v:'200 ml'},{n:'Madu',v:'1 sdm'},{n:'Lemon',v:'½ buah'}],
+   step:['Seduh teh jasmine pearl dengan air 80°C selama 2-3 menit','Saring teh, tambahkan madu, aduk rata','Peras lemon segar','Tuang ke gelas berisi es batu, tambahkan irisan lemon']},
+  {n:'Honey Chamomile Tea',em:'🌼',tag:'Calming',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Teh Chamomile',v:'5 gr'},{n:'Air Panas 90°C',v:'200 ml'},{n:'Madu',v:'2 sdm'},{n:'Lemon',v:'¼ buah'}],
+   step:['Seduh chamomile dengan air panas 90°C selama 5 menit','Saring bunga chamomile','Tambahkan madu, aduk rata','Peras lemon segar, sajikan hangat atau dengan es']},
+  {n:'Peach Oolong Tea',em:'🍑',tag:'Fruity Tea',wkt:'7 mnt',porsi:'300ml',
+   bahan:[{n:'Teh Oolong',v:'8 gr'},{n:'Air Panas 85°C',v:'200 ml'},{n:'Sirup Peach',v:'35 ml'},{n:'Air Soda',v:'80 ml'}],
+   step:['Seduh oolong dengan air 85°C selama 3 menit','Saring teh, dinginkan','Campur sirup peach dengan teh oolong','Isi gelas dengan es batu','Tuang campuran teh, tambahkan air soda']},
+  {n:'Rosella Hibiscus Soda',em:'🌺',tag:'Tangy',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Bunga Rosella Kering',v:'10 gr'},{n:'Air Panas',v:'150 ml'},{n:'Gula',v:'2 sdm'},{n:'Air Soda',v:'100 ml'},{n:'Lemon',v:'½ buah'}],
+   step:['Seduh rosella dengan air panas 5 menit, saring','Tambahkan gula, aduk rata hingga larut','Peras lemon ke dalam teh rosella','Dinginkan, tuang ke gelas berisi es','Tambahkan air soda, aduk perlahan']},
+  {n:'Ginger Lemon Tea',em:'🍋',tag:'Healthy',wkt:'10 mnt',porsi:'250ml',
+   bahan:[{n:'Teh Hitam',v:'150 ml'},{n:'Jahe Segar',v:'3 iris'},{n:'Lemon',v:'1 buah'},{n:'Madu',v:'2 sdm'}],
+   step:['Rebus air dengan jahe iris 5 menit','Seduh teh hitam dengan air jahe','Saring, tambahkan perasan lemon segar dan madu','Sajikan hangat atau dengan es batu']},
+  {n:'Peppermint Tea Mojito',em:'🌿',tag:'Refreshing',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Teh Peppermint',v:'3 kantong'},{n:'Air Panas',v:'150 ml'},{n:'Daun Mint',v:'10 lembar'},{n:'Lemon',v:'½ buah'},{n:'Air Soda',v:'100 ml'},{n:'Gula Cair',v:'20 ml'}],
+   step:['Seduh teh peppermint 3 menit, dinginkan','Tumbuk daun mint dengan gula cair di dasar gelas','Isi gelas dengan es batu','Peras lemon, tuang teh peppermint','Tambahkan air soda, hias dengan daun mint']},
+  {n:'Blue Butterfly Pea Tea',em:'💙',tag:'Instagram',wkt:'5 mnt',porsi:'250ml',
+   bahan:[{n:'Bunga Telang',v:'10 kuntum'},{n:'Air Panas',v:'200 ml'},{n:'Madu',v:'1 sdm'},{n:'Lemon',v:'¼ buah'}],
+   step:['Seduh bunga telang dengan air panas — warna biru alami keluar','Saring bunga, tambahkan madu','Sajikan di gelas bening dengan es batu','Teteskan lemon — saksikan warna berubah ungu!']},
+],
+'🥛 Susu & Creamy':[
+  {n:'Matcha Latte',em:'🍵',tag:'Classic Matcha',wkt:'5 mnt',porsi:'250ml',
+   bahan:[{n:'Matcha Ceremonial',v:'8 gr'},{n:'Air Panas 70°C',v:'30 ml'},{n:'Susu Full Cream',v:'177 ml'},{n:'Gula',v:'15 gr'}],
+   step:['Ayak matcha untuk menghindari gumpalan','Larutkan matcha+gula dengan 30ml air panas 70°C, aduk dengan chasen/whisk','Isi gelas dengan es batu','Tuang susu segar dingin','Tuang matcha latte di atas']},
+  {n:'Strawberry Milk',em:'🍓',tag:'Sweet Pink',wkt:'5 mnt',porsi:'250ml',
+   bahan:[{n:'Sirup Strawberry',v:'40 ml'},{n:'Susu Full Cream Dingin',v:'180 ml'},{n:'Strawberry Segar',v:'3 buah'}],
+   step:['Potong strawberry segar jadi dua bagian','Tumbuk ringan strawberry di dasar gelas','Isi gelas dengan es batu','Tuang sirup strawberry','Tuang susu full cream perlahan untuk efek gradasi merah-putih']},
+  {n:'Red Velvet Latte',em:'❤️',tag:'Romantic Red',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Red Velvet Syrup',v:'40 ml'},{n:'Susu Full Cream',v:'180 ml'},{n:'Krimer Liquid',v:'20 ml'}],
+   step:['Panaskan susu, kocok dengan krimer hingga berbusa ringan','Campur red velvet syrup di dasar gelas berisi es','Tuang campuran susu-krimer perlahan','Hias dengan drizzle red velvet syrup di atas']},
+  {n:'Cookies & Cream Frappe',em:'🍪',tag:'Dessert Drink',wkt:'8 mnt',porsi:'350ml',
+   bahan:[{n:'Susu',v:'200 ml'},{n:'Biskuit Oreo',v:'5 keping'},{n:'Es Batu',v:'150 gr'},{n:'Whipped Cream',v:'3 sdm'}],
+   step:['Hancurkan 3 biskuit oreo, sisakan 2 untuk hiasan','Blender susu+es batu+biskuit hancur hingga halus','Tuang ke gelas tinggi','Tambahkan whipped cream di atas','Hancurkan biskuit sisa sebagai topping']},
+  {n:'Milo Dinosaur',em:'🦕',tag:'Childhood Fav',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Milo',v:'5 sdm'},{n:'Susu Kental Manis',v:'2 sdm'},{n:'Air Panas',v:'50 ml'},{n:'Es Batu',v:'150 gr'},{n:'Milo Bubuk Extra',v:'2 sdm'}],
+   step:['Larutkan milo dan susu kental dengan air panas, aduk rata','Isi gelas dengan es batu','Tuang larutan milo ke gelas','Taburi milo bubuk extra di atas — jangan diaduk, itu "dinasaurnya"!']},
+  {n:'Taro Latte',em:'🟣',tag:'Purple Dream',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Bubuk Taro',v:'30 gr'},{n:'Susu Full Cream',v:'200 ml'},{n:'Gula',v:'15 gr'}],
+   step:['Larutkan bubuk taro dengan sedikit susu hangat terlebih dahulu','Tambahkan gula, aduk hingga larut','Tambahkan sisa susu dingin, aduk rata','Tuang ke gelas berisi es batu']},
+  {n:'Chocolate Milkshake',em:'🍫',tag:'Classic Choco',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Susu Full Cream',v:'200 ml'},{n:'Es Krim Coklat',v:'3 scoop'},{n:'Coklat Bubuk',v:'2 sdm'}],
+   step:['Blender es krim coklat+susu+coklat bubuk hingga kental creamy','Tuang ke gelas tinggi','Hias dengan whipped cream dan taburan coklat bubuk']},
+  {n:'Banana Milk Shake',em:'🍌',tag:'Energizing',wkt:'6 mnt',porsi:'300ml',
+   bahan:[{n:'Pisang Matang',v:'2 buah'},{n:'Susu Full Cream',v:'200 ml'},{n:'Madu',v:'1 sdm'},{n:'Es Batu',v:'100 gr'}],
+   step:['Kupas dan bekukan pisang matang','Blender pisang+susu+madu+es batu hingga smooth','Tuang ke gelas tinggi','Hias dengan irisan pisang dan madu drizzle']},
+],
+'🍓 Minuman Buah':[
+  {n:'Es Jeruk Kinclong',em:'🍊',tag:'Vitamin C',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Jeruk Segar',v:'3 buah'},{n:'Gula Cair',v:'25 ml'},{n:'Air Soda',v:'150 ml'}],
+   step:['Peras jeruk segar, saring biji','Campur air perasan jeruk dengan gula cair','Isi gelas dengan es batu','Tuang campuran jeruk-gula','Tambahkan air soda, aduk perlahan, hias dengan irisan jeruk']},
+  {n:'Mangga Srikaya Soda',em:'🥭',tag:'Tropical',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Mangga Harum Manis',v:'200 gr'},{n:'Sirup Srikaya',v:'30 ml'},{n:'Air Soda',v:'100 ml'},{n:'Lemon',v:'¼ buah'}],
+   step:['Blender mangga segar dengan sedikit air hingga puree halus','Campur sirup srikaya+perasan lemon di gelas','Tuang puree mangga','Isi dengan es batu','Tambahkan air soda perlahan']},
+  {n:'Watermelon Cooler',em:'🍉',tag:'Summer Hit',wkt:'5 mnt',porsi:'350ml',
+   bahan:[{n:'Semangka',v:'300 gr'},{n:'Mint',v:'5 lembar'},{n:'Lemon',v:'½ buah'},{n:'Gula Cair',v:'15 ml'}],
+   step:['Blender semangka (tanpa biji) hingga halus','Saring jika perlu','Campur dengan perasan lemon+gula cair','Tumbuk mint di dasar gelas','Tuang jus semangka+es batu','Hias dengan mint segar']},
+  {n:'Jus Alpukat Coklat',em:'🥑',tag:'Creamy Choco',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Alpukat Matang',v:'1 buah'},{n:'Susu Kental Manis',v:'30 ml'},{n:'Coklat Sirup',v:'20 ml'},{n:'Susu Segar',v:'100 ml'}],
+   step:['Kupas alpukat matang, buang biji','Blender alpukat+susu kental+susu segar+es batu','Tuang ke gelas tinggi','Drizzle coklat syrup di atas, aduk sebelum minum']},
+  {n:'Pineapple Mint Cooler',em:'🍍',tag:'Zesty',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Nanas Segar',v:'200 gr'},{n:'Daun Mint',v:'8 lembar'},{n:'Gula Aren',v:'20 ml'},{n:'Air Soda',v:'100 ml'},{n:'Lemon',v:'½ buah'}],
+   step:['Blender nanas segar hingga halus, saring','Tumbuk daun mint+gula aren di dasar gelas','Tambahkan perasan lemon','Isi dengan es batu','Tuang jus nanas, tambahkan air soda perlahan']},
+],
+'🧃 Soda & Spesial':[
+  {n:'Blue Ocean Soda',em:'🌊',tag:'Instagram',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Sirup Biru (Blue Curacao)',v:'30 ml'},{n:'Air Soda',v:'200 ml'},{n:'Air Lemon',v:'20 ml'},{n:'Es Batu',v:'150 gr'}],
+   step:['Tuang sirup biru ke gelas berisi es','Peras lemon ke gelas','Tuang air soda perlahan dari tepi gelas','Aduk perlahan, hias dengan irisan lemon']},
+  {n:'Yakult Soda Lemon',em:'🥛',tag:'Probiotic',wkt:'3 mnt',porsi:'250ml',
+   bahan:[{n:'Yakult',v:'2 botol'},{n:'Air Soda',v:'150 ml'},{n:'Lemon',v:'½ buah'},{n:'Es Batu',v:'100 gr'}],
+   step:['Isi gelas tinggi dengan es batu','Tuang yakult ke gelas','Peras lemon segar','Tuang air soda dari atas, aduk perlahan']},
+  {n:'Mocktail Sunrise',em:'🌅',tag:'Colorful',wkt:'8 mnt',porsi:'300ml',
+   bahan:[{n:'Jus Jeruk Segar',v:'150 ml'},{n:'Sirup Grenadine',v:'20 ml'},{n:'Air Soda',v:'100 ml'}],
+   step:['Isi gelas dengan es batu','Tuang jus jeruk segar','Tambahkan air soda','Teteskan grenadine syrup di tepi gelas — akan turun membentuk "sunrise"','Sajikan tanpa diaduk untuk efek warna']},
+  {n:'Soda Gembira',em:'🎉',tag:'Fun',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Sirup Merah (Frambosen)',v:'30 ml'},{n:'Air Soda',v:'200 ml'},{n:'Susu Kental Putih',v:'20 ml'},{n:'Es Batu',v:'150 gr'}],
+   step:['Tuang sirup frambosen ke gelas berisi es','Tambahkan susu kental putih','Tuang air soda perlahan','Aduk sedikit, warna merah muda akan muncul']},
+  {n:'Lychee Sparkling',em:'🍈',tag:'Premium Soda',wkt:'5 mnt',porsi:'300ml',
+   bahan:[{n:'Sirup Leci',v:'35 ml'},{n:'Air Soda Premium',v:'200 ml'},{n:'Leci Kalengan',v:'5 biji'},{n:'Rose Syrup',v:'10 ml'}],
+   step:['Masukkan leci kalengan ke gelas bening','Isi dengan es batu','Campur sirup leci+rose syrup di gelas','Tuang air soda premium perlahan','Aduk sangat perlahan, hias dengan bunga rose edible']},
+  {n:'Es Kelapa Jeruk',em:'🥥',tag:'Natural',wkt:'5 mnt',porsi:'350ml',
+   bahan:[{n:'Air Kelapa Muda',v:'200 ml'},{n:'Daging Kelapa Muda',v:'50 gr'},{n:'Jeruk Nipis',v:'1 buah'},{n:'Gula Aren',v:'15 ml'}],
+   step:['Masukkan daging kelapa muda ke gelas','Isi dengan es batu','Peras jeruk nipis ke gelas','Tuang gula aren cair','Tuang air kelapa muda segar']},
+  {n:'Hojicha Latte',em:'🍂',tag:'Earthy',wkt:'6 mnt',porsi:'250ml',
+   bahan:[{n:'Hojicha Powder',v:'8 gr'},{n:'Air Panas',v:'30 ml'},{n:'Susu Oat/Full Cream',v:'180 ml'},{n:'Gula',v:'10 gr'}],
+   step:['Larutkan hojicha powder+gula dengan air panas','Aduk hingga tidak ada gumpalan','Isi gelas dengan es batu','Tuang susu oat atau full cream','Tuang larutan hojicha di atas']},
+]};
+
+/* ── 40 ARTIKEL INFO KOPI ─────────────── */
+const DOKUMEN=[
+  {nm:'Asal Mula Kopi & Sejarahnya',ic:'globe',b:`<p>Kopi ditemukan di <b>Ethiopia abad ke-9</b> oleh penggembala Kaldi yang melihat kambingnya bersemangat setelah makan biji kopi. Dari Ethiopia, kopi menyebar ke Yaman, Arab, lalu ke seluruh dunia. <b>Arabika Gayo</b> dari Aceh Tengah adalah kopi premium Indonesia ditanam di ketinggian 1200–1500 mdpl dengan cita rasa fruity dan floral unik.</p>`},
+  {nm:'Arabika vs Robusta: Perbedaan Lengkap',ic:'coffee',b:`<h4>Arabika</h4><ul><li>Ketinggian >1000 mdpl</li><li>Rasa asam buah, floral, kompleks</li><li>Kafein ~1.2%</li><li>Harga lebih tinggi</li></ul><h4>Robusta</h4><ul><li>Dataran rendah</li><li>Rasa kuat, pahit, earthy</li><li>Kafein ~2.5%</li><li>Lebih tahan penyakit</li></ul><p>Arabika cocok untuk pour over, Robusta untuk espresso blend.</p>`},
+  {nm:'Jenis-Jenis Biji Kopi Dunia',ic:'globe',b:`<ul><li><b>Arabika:</b> Ethiopia, Colombia, Gayo — fruity, floral</li><li><b>Robusta:</b> Vietnam, Uganda — bold, bitter</li><li><b>Liberika:</b> Filipina — aroma kayu, unik</li><li><b>Excelsa:</b> Asia Tenggara — asam, buah</li></ul><p>Indonesia memiliki varietas unggulan: Gayo, Toraja, Flores Bajawa, Kintamani, Wamena.</p>`},
+  {nm:'Level Roasting Biji Kopi',ic:'flame',b:`<h4>Light Roast (180-205°C)</h4><p>Asam tinggi, floral, fruity. Cocok untuk pour over dan cold brew.</p><h4>Medium Roast (210-220°C)</h4><p>Seimbang, caramel, nutty. Populer untuk latte dan espresso blend.</p><h4>Medium-Dark (225-230°C)</h4><p>Bold, dark chocolate, sedikit pahit. Untuk espresso.</p><h4>Dark Roast (240°C+)</h4><p>Pahit dominan, smoky, body berat. Untuk kopi tubruk dan robusta.</p>`},
+  {nm:'Proses Pasca Panen Kopi',ic:'leaf',b:`<h4>Natural / Dry Process</h4><p>Biji kopi dijemur utuh — fruity, wine-like, body berat. Umum di Ethiopia.</p><h4>Washed / Wet Process</h4><p>Kulit dibuang, difermentasi, dicuci — bersih, asam cerah. Khas Colombia.</p><h4>Honey Process</h4><p>Sebagian kulit dibuang — manis, seimbang antara natural dan washed.</p><h4>Wet-Hulled (Giling Basah)</h4><p>Khas Sumatra/Gayo — earthy, body berat, low acid. Proses unik Indonesia.</p>`},
+  {nm:'Cara Membuat Cold Brew Sempurna',ic:'coffee',b:`<ul><li><b>Rasio:</b> 1:10 (80gr kopi : 800ml air dingin)</li><li><b>Giling:</b> Kasar (coarse), setara French Press</li><li><b>Campurkan</b> dan aduk rata</li><li><b>Simpan</b> di kulkas 12-24 jam (makin lama makin kuat)</li><li><b>Saring</b> dengan filter kopi atau kain bersih</li><li><b>Encerkan</b> 1:1 dengan air/susu saat sajikan</li><li><b>Simpan</b> max 2 minggu di kulkas</li></ul><p><em>Tips: Gunakan air filtered untuk rasa terbaik.</em></p>`},
+  {nm:'Tips Hitung Harga Jual Kopi',ic:'rp',b:`<h4>Rumus Dasar</h4><p><b>Harga Jual = HPP ÷ (1 - Target Margin%)</b></p><h4>Contoh</h4><ul><li>HPP per cup: Rp 8.000</li><li>Target margin 50%</li><li>Harga Jual = 8.000 ÷ 0.5 = <b>Rp 16.000</b></li><li>Profit per cup = Rp 8.000</li></ul><p>Target food cost ideal ≤30%. Harga pasar lokal perlu disurvei terlebih dahulu.</p>`},
+  {nm:'Cara Membuat Latte Art',ic:'coffee',b:`<h4>Dasar-Dasar</h4><ul><li>Steam susu hingga microfoam halus 60-65°C</li><li>Texture seperti "cat tembok basah" — glossy smooth</li><li>Atur sudut cangkir 45° saat mulai tuang</li><li>Tuang dari ketinggian 5cm, dekatkan jug saat hampir penuh</li></ul><h4>Pola Dasar</h4><ul><li>Rosetta: goyangkan jug sambil mundur lalu tarik garis maju</li><li>Tulip: tuang tiga kali berturut-turut di tengah</li><li>Heart: satu tuang lalu tarik garis memotong</li></ul>`},
+  {nm:'Jenis Alat Seduh Kopi Manual',ic:'tool',b:`<h4>V60 Pour Over</h4><p>Jernih, menonjolkan karakter kopi, cocok single origin.</p><h4>French Press</h4><p>Full body, berminyak, earthy. Kopi tidak tersaring sempurna.</p><h4>AeroPress</h4><p>Fleksibel, cepat 1-2 menit, bisa buat espresso-like.</p><h4>Moka Pot</h4><p>Stovetop, kuat, mendekati espresso, ekonomis.</p><h4>Syphon</h4><p>Teatrikal, kopi bersih dan kompleks, butuh skill.</p><h4>Cold Brew</h4><p>12-24 jam, rendah asam, smooth, concentrated.</p>`},
+  {nm:'Cara Menyimpan Biji Kopi',ic:'box',b:`<ul><li>Wadah kedap udara (bukan plastik bening)</li><li>Hindari sinar matahari langsung</li><li>Simpan di tempat sejuk, kering, gelap</li><li><b>Jangan</b> simpan di kulkas (menyerap aroma)</li><li>Best before: 4 minggu setelah tanggal roasting</li><li>Giling kopi baru sebelum diseduh untuk rasa optimal</li></ul>`},
+  {nm:'Teknik Ekstraksi Espresso',ic:'settings',b:`<h4>Parameter Kunci (Standar SCA)</h4><ul><li><b>Dosis:</b> 18-20gr (double shot)</li><li><b>Yield:</b> 36-40ml (rasio 1:2)</li><li><b>Waktu:</b> 25-30 detik</li><li><b>Suhu air:</b> 90-94°C</li><li><b>Tekanan:</b> 9 bar</li><li><b>Tamping:</b> 15-20kg tekanan merata</li></ul><p>Under-extracted: asam, tipis. Over-extracted: pahit, dry.</p>`},
+  {nm:'Manfaat Kopi untuk Kesehatan',ic:'zap',b:`<ul><li>Kafein meningkatkan fokus dan energi</li><li>Kopi kaya <b>antioksidan</b> (chlorogenic acid)</li><li>Menurunkan risiko Parkinson dan Alzheimer</li><li>Meningkatkan performa olahraga 3-5%</li><li>Menurunkan risiko diabetes tipe 2</li></ul><p><b>Batas aman:</b> 400mg kafein/hari (≈4 cangkir kopi). Hindari kopi berlebihan untuk penderita hipertensi dan ibu hamil.</p>`},
+  {nm:'Mitos dan Fakta Kopi',ic:'globe',b:`<h4>MITOS ❌</h4><ul><li>Kopi bikin stunting</li><li>Kopi harus diminum panas</li><li>Kopi bikin tidak bisa tidur selamanya</li></ul><h4>FAKTA ✅</h4><ul><li>Kopi mengandung antioksidan lebih tinggi dari teh</li><li>Cold brew lebih rendah asam dari kopi panas</li><li>Kafein hilang dari tubuh dalam 5-6 jam</li><li>Kopi bisa positif untuk kesehatan jantung jika dikonsumsi moderat</li></ul>`},
+  {nm:'Tren Kopi Indonesia 2024-2025',ic:'star',b:`<ul><li>☕ Kopi susu gula aren: tetap #1 pilihan</li><li>🌿 Kopi pandan & floral latte: naik daun</li><li>🧂 Sea salt coffee: makin populer</li><li>🍋 Cold brew lemonade: hits di cafe</li><li>🌱 Plant-based milk (oat, almond, kelapa)</li><li>🧋 Boba coffee fusion</li><li>🏠 Home brewing meningkat 40% pasca pandemi</li><li>💻 Subscription kopi specialty marak</li></ul>`},
+  {nm:'Potensi Bisnis Kopi Botolan',ic:'bottle',b:`<ul><li>Modal awal Rp 1-5 juta untuk skala rumahan</li><li>Margin keuntungan 50-70%</li><li>Shelf life 3-5 hari (tanpa pengawet) di kulkas</li><li>Pasar: kantin, warung, online shop, pre-order</li><li>Kemasan botol kaca premium meningkatkan nilai jual 30%</li><li>Target konsumen: pekerja kantor, mahasiswa, ibu muda</li></ul>`},
+  {nm:'Tips Branding Bisnis Kopi',ic:'star',b:`<ul><li>Nama brand: mudah diingat, unik, bermakna</li><li>Identitas visual: logo, warna, font konsisten</li><li>Storytelling: ceritakan asal kopi Anda</li><li>Instagram & TikTok: konten behind the scenes menarik</li><li>Kemasan: label profesional meningkatkan kepercayaan</li><li>Review pelanggan: minta ulasan di Google/Tokopedia</li></ul>`},
+  {nm:'Cara Mengelola Keuangan Usaha Kopi',ic:'chart',b:`<ul><li>Pisahkan rekening pribadi dan usaha</li><li>Catat <b>setiap</b> pemasukan dan pengeluaran harian</li><li>Hitung HPP sebelum menetapkan harga jual</li><li>Target food cost ≤30% dari harga jual</li><li>Evaluasi menu bulanan: hapus menu tidak laku</li><li>Stok bahan minimal 2 minggu ke depan</li><li>Dana darurat usaha: 3 bulan biaya operasional</li></ul>`},
+  {nm:'Cara Buat Cold Brew Nitrogen',ic:'coffee',b:`<p>Nitro cold brew menggunakan gas nitrogen untuk membuat kopi berbusa creamy seperti bir hitam. Di rumah bisa dibuat dengan <b>whipped cream dispenser (ISI siphon)</b>.</p><ul><li>Buat cold brew concentrate</li><li>Masukkan ke ISI siphon</li><li>Isi dengan 1-2 cartridge N₂O</li><li>Kocok 5-6 kali</li><li>Sajikan langsung — foam hilang dalam 5 menit</li></ul>`},
+  {nm:'Fermentasi & Proses Anaerobic Kopi',ic:'leaf',b:`<p>Proses anaerobic adalah metode modern di mana biji kopi difermentasi dalam tangki tertutup tanpa oksigen. Hasilnya: rasa fruity yang intens, wine-like, dan kompleks.</p><ul><li>Fermentasi 24-120 jam dalam tangki sealed</li><li>CO₂ keluar melalui katup satu arah</li><li>Profil rasa: tropis, berry, fermented wine</li><li>Harga lebih premium (kopi specialty)</li></ul>`},
+  {nm:'Kopi Specialty vs Kopi Komersial',ic:'star',b:`<h4>Specialty Coffee (Skor >80 SCA)</h4><ul><li>Traceability: diketahui asal petani, kebun, proses</li><li>Single origin: karakter rasa unik per origin</li><li>Roasting by-order untuk kesegaran maksimal</li><li>Harga: Rp 150.000-500.000/250gr</li></ul><h4>Kopi Komersial</h4><ul><li>Blend berbagai origin</li><li>Konsistensi rasa terjaga</li><li>Harga lebih terjangkau</li></ul>`},
+  {nm:'Tips Jualan Kopi Online',ic:'globe',b:`<ul><li>Foto produk yang menarik adalah investasi terbaik</li><li>Deskripsi: sebutkan asal kopi, proses, tasting notes</li><li>Tokopedia/Shopee: optimasi kata kunci "kopi gayo", "kopi arabika"</li><li>Instagram: gunakan hashtag lokal (#kopigayo #kopibotolan)</li><li>WhatsApp Business: quick reply untuk order</li><li>Packaging aman anti bocor untuk pengiriman</li></ul>`},
+  {nm:'Perbedaan Espresso, Ristretto, Lungo',ic:'coffee',b:`<h4>Ristretto (Pendek)</h4><p>15-20ml, 15-20 detik, sangat concentrate, manis intens.</p><h4>Espresso (Standar)</h4><p>30-40ml, 25-30 detik, seimbang antara asam, manis, pahit.</p><h4>Lungo (Panjang)</h4><p>50-60ml, 35-45 detik, lebih bitter, cocok untuk Americano.</p>`},
+  {nm:'Cara Cupping (Uji Kopi Profesional)',ic:'settings',b:`<ul><li>Giling kopi medium-coarse: 12gr per 200ml air</li><li>Masukkan kopi ke mangkuk, tuang air 93°C</li><li>Biarkan 4 menit, pecahkan kerak dan cium aroma</li><li>Saring busa, cicipi dengan sendok cupping berulang kali</li><li>Evaluasi: aroma, flavor, aftertaste, acidity, body, balance, sweetness</li></ul>`},
+  {nm:'Cara Buat Sirup untuk Kopi',ic:'leaf',b:`<h4>Simple Syrup</h4><p>Gula:air = 1:1, panaskan hingga larut. Simpan 2-4 minggu di kulkas.</p><h4>Gula Aren Cair</h4><p>Sisir gula aren + sedikit air, panaskan + garam + pandan. Konsistensi kental.</p><h4>Vanilla Syrup</h4><p>Simple syrup + vanilla extract + vanili pods. Infuse 24 jam.</p><h4>Hazelnut/Caramel</h4><p>Gunakan flavor emulsion atau buat karamel dari gula dimasak hingga amber.</p>`},
+  {nm:'Peralatan Wajib Barista Rumahan',ic:'tool',b:`<ul><li><b>Grinder burr:</b> konsistensi grind = rasa konsisten</li><li><b>Scale digital:</b> timbang kopi dan air akurat (0.1gr)</li><li><b>Kettle gooseneck:</b> kontrol aliran pour over</li><li><b>Thermometer:</b> suhu air 90-94°C untuk espresso</li><li><b>Timer:</b> waktu brew konsisten</li><li><b>Milk frother:</b> steam susu untuk latte</li></ul>`},
+  {nm:'Jenis-Jenis Susu untuk Kopi',ic:'coffee',b:`<h4>Susu Full Cream</h4><p>Lemak tinggi, foam terbaik untuk latte art.</p><h4>Oat Milk</h4><p>Plant-based favorit barista, creamy, foam oke, manis alami.</p><h4>Almond Milk</h4><p>Ringan, sedikit nutty, cocok untuk kopi light roast.</p><h4>Susu Kental Manis</h4><p>Manis, thick, tradisional untuk kopi susu Indonesia.</p><h4>Krimer Nabati</h4><p>Ekonomis, tahan lama, tidak perlu kulkas.</p>`},
+  {nm:'Tips Mengelola Stok Bahan Kopi',ic:'box',b:`<ul><li>Metode FIFO: First In First Out — stok lama dipakai duluan</li><li>Catat tanggal expired di setiap kemasan</li><li>Stok minimal 1 minggu untuk bahan pokok</li><li>Susu segar: pesan 2-3 hari sekali</li><li>Kopi beans: 4 minggu sekali, max 2kg/batch</li><li>Syrup: simpan di kulkas setelah dibuka</li></ul>`},
+  {nm:'Cara Menghitung BEP (Break Even Point)',ic:'rp',b:`<h4>Rumus BEP</h4><p><b>BEP = Biaya Tetap ÷ (Harga Jual - Biaya Variabel)</b></p><h4>Contoh</h4><ul><li>Biaya tetap/bulan: Rp 2.000.000 (sewa, listrik)</li><li>Harga jual: Rp 15.000</li><li>Biaya variabel (HPP): Rp 6.000</li><li>BEP = 2.000.000 ÷ (15.000-6.000) = <b>222 cup/bulan</b></li></ul>`},
+  {nm:'Cara Mendirikan Usaha Kopi dari Nol',ic:'chart',b:`<ol><li>Riset pasar: siapa target pelanggan?</li><li>Tentukan konsep: botolan, cup, cafe mini, katering</li><li>Hitung modal awal dan HPP</li><li>Cari supplier bahan baku terpercaya</li><li>Buat brand (nama, logo, kemasan)</li><li>Mulai kecil: 20-50 cup/hari</li><li>Evaluasi dan scale up perlahan</li></ol>`},
+  {nm:'Kopi Gayo: Keunikan dan Keistimewaan',ic:'map',b:`<p>Kopi Arabika Gayo dari Aceh Tengah adalah salah satu kopi terbaik dunia. Keistimewaannya:</p><ul><li>Ditanam di ketinggian 1200-1500 mdpl di Pegunungan Bukit Barisan</li><li>Proses wet-hulled (giling basah) khas Sumatra</li><li>Tasting notes: coklat, karamel, sedikit earthy, body berat</li><li>Certified USDA Organic & Fair Trade</li><li>Mendapatkan Geographical Indication (IG) dari pemerintah Indonesia</li></ul>`},
+  {nm:'Cara Membuat Kopi Susu yang Konsisten',ic:'coffee',b:`<ul><li>Timbang semua bahan (tidak mengandalkan feeling)</li><li>Espresso: selalu double shot 18-20gr</li><li>Gula aren: buat sirup batch besar, ukur ml setiap sajian</li><li>Susu: gunakan gelas ukur, bukan cangkir biasa</li><li>Es: hitung gram, bukan jumlah batu</li><li>Buat resep tertulis dan foto standar tampilan</li></ul>`},
+  {nm:'Cara Mengatasi Kopi yang Terlalu Pahit',ic:'settings',b:`<ul><li>Kurangi waktu brew (kopi over-extracted)</li><li>Giling lebih kasar</li><li>Kurangi dosis kopi</li><li>Turunkan suhu air (92°C bukan 96°C)</li><li>Coba roast yang lebih light</li></ul><p>Pahit alami kopi berbeda dengan pahit karena over-extraction. Pahit alami ada manis di belakang, pahit over-extracted dry dan tidak menyenangkan.</p>`},
+  {nm:'Cara Membuat Gula Aren Cair (Sirup)',ic:'leaf',b:`<p>Resep standar gula aren cair untuk kopi susu:</p><ul><li>Sisir 250gr gula aren</li><li>Larutkan dengan 125ml air</li><li>Panaskan api sedang, aduk terus</li><li>Tambahkan 1 lembar daun pandan dan sejumput garam</li><li>Masak hingga larut sempurna (±10 menit)</li><li>Saring, dinginkan, simpan di botol kaca</li><li>Tahan 2 minggu di kulkas</li></ul>`},
+  {nm:'Cara Baca Tasting Notes Kopi',ic:'star',b:`<h4>Flavor Wheel (SCA)</h4><p>Tasting notes adalah deskripsi rasa dan aroma kopi. Cara membaca:</p><ul><li><b>Fruity:</b> berry, citrus, tropical — dari proses natural dan varietasnya</li><li><b>Nutty/Chocolaty:</b> hazelnut, dark choco — umum di medium roast</li><li><b>Floral:</b> jasmine, rose — khas Arabika Ethiopia</li><li><b>Spicy/Herbal:</b> kayu manis, tembakau — wet-hulled Sumatra</li></ul>`},
+  {nm:'Cara Membuat Espresso Tanpa Mesin',ic:'tool',b:`<h4>Alternatif Espresso di Rumah</h4><h4>AeroPress (Espresso-style)</h4><ul><li>Giling halus, rasio 1:2 (15gr:30ml)</li><li>Tuang air 85°C, press dalam 20-25 detik</li></ul><h4>Moka Pot</h4><ul><li>Giling medium-fine</li><li>Api kecil, jangan gosong</li><li>Angkat saat bunyi "ssshhhh"</li></ul>`},
+  {nm:'Program Loyalitas Pelanggan Kopi',ic:'chart',b:`<ul><li>Kartu stamp: beli 10 gratis 1</li><li>Member WhatsApp: info promo eksklusif</li><li>Birthday reward: diskon di hari ulang tahun</li><li>Referral: ajak teman dapat diskon</li><li>Seasonal menu: menu spesial Ramadan, Lebaran, dll</li><li>Pre-order discount: pesan H-1 lebih murah</li></ul>`},
+  {nm:'Cara Packaging Kopi Botolan',ic:'bottle',b:`<ul><li>Botol kaca 250ml/350ml: premium, reusable</li><li>Botol plastik PET food-grade: lebih ringan untuk delivery</li><li>Label: nama produk, komposisi, tanggal produksi, expired, PIRT</li><li>Seal tutup untuk keamanan dan bukti belum dibuka</li><li>Packaging outer untuk pengiriman: bubble wrap, kardus</li><li>Suhu pengiriman: ice gel pack untuk pengiriman >4 jam</li></ul>`},
+  {nm:'Izin PIRT untuk Usaha Kopi Rumahan',ic:'globe',b:`<ul><li>PIRT (Produksi Industri Rumah Tangga) wajib untuk produk makanan/minuman yang dijual</li><li>Daftar ke Dinas Kesehatan kabupaten/kota</li><li>Syarat: pelatihan keamanan pangan, sertifikat produksi, uji lab</li><li>Biaya relatif terjangkau (Rp 0 - Rp 300.000)</li><li>Proses 1-3 bulan</li><li>PIRT berlaku 5 tahun, bisa diperpanjang</li></ul>`},
+  {nm:'Cara Membuat Cold Brew Concentrate',ic:'coffee',b:`<p>Cold brew concentrate = cold brew yang lebih pekat (1:4 atau 1:5):</p><ul><li>80gr kopi per 320-400ml air (1:4 atau 1:5)</li><li>Simpan di kulkas 18-24 jam</li><li>Hasilnya sangat pekat — encerkan 1:1 sebelum disajikan</li><li>Manfaat: hemat tempat di kulkas, lebih fleksibel</li><li>Bisa dijual sebagai "cold brew ready-to-dilute"</li></ul>`},
+  {nm:'Cara Foto Produk Kopi yang Menarik',ic:'star',b:`<ul><li>Gunakan pencahayaan alami (dekat jendela)</li><li>Background netral: putih, kayu, marmer</li><li>Angle: dari atas (flat lay) atau 45° untuk efek mewah</li><li>Props: biji kopi, daun, sendok kayu, bunga</li><li>Edit dengan Lightroom/VSCO: tone warm dan sedikit contrast</li><li>Konsistensi preset: semua foto terlihat "satu tema"</li></ul>`},
+  {nm:'Cara Buat Kopi Batch Brewing untuk Botolan',ic:'bottle',b:`<p>Batch brewing = membuat kopi dalam jumlah besar sekaligus:</p><ul><li>Gunakan <b>drip coffee maker</b> atau <b>filter besar</b></li><li>Rasio standar: 60gr kopi per 1 liter air</li><li>Air: suhu 93°C, filter paper bersih</li><li>Botolkan saat kopi sudah dingin (di bawah 40°C)</li><li>Simpan di kulkas max 5 hari (tanpa pengawet)</li></ul>`},
+  {nm:'Standar Kebersihan Produksi Kopi',ic:'settings',b:`<ul><li>Cuci tangan 20 detik sebelum dan sesudah produksi</li><li>Sterilkan botol dengan air mendidih sebelum diisi</li><li>Gunakan sarung tangan food-grade saat bottling</li><li>Bersihkan semua peralatan dengan sabun food-grade</li><li>Cek suhu kulkas: 3-5°C untuk produk segar</li><li>Catat tanggal produksi di setiap batch</li></ul>`},
+];
+
 const BREW_METHODS=[{id:'v60',nm:'Pour Over V60',params:[{l:'Kopi',v:'15 gr'},{l:'Air',v:'250 ml'},{l:'Suhu',v:'93°C'},{l:'Waktu',v:'3–4 mnt'}],steps:[{t:'Bloom',s:'Tuang 30ml air panas, tunggu 30 detik',sec:30},{t:'Tuang 1',s:'Tuang melingkar hingga 130ml',sec:60},{t:'Tuang 2',s:'Lanjutkan tuang hingga 250ml',sec:60},{t:'Finish',s:'Tunggu semua tetes turun',sec:30}]},{id:'french',nm:'French Press',params:[{l:'Kopi',v:'30 gr'},{l:'Air',v:'350 ml'},{l:'Suhu',v:'93°C'},{l:'Waktu',v:'4 mnt'}],steps:[{t:'Masukkan Kopi',s:'Masukkan 30gr kopi giling kasar',sec:0},{t:'Tuang Air',s:'Tuang air 93°C, aduk sekali',sec:10},{t:'Steep',s:'Tutup, tunggu 4 menit',sec:240},{t:'Press',s:'Tekan plunger perlahan 25 detik',sec:25}]},{id:'moka',nm:'Moka Pot',params:[{l:'Kopi',v:'15 gr'},{l:'Air',v:'150 ml'},{l:'Api',v:'Kecil'},{l:'Waktu',v:'3–5 mnt'}],steps:[{t:'Isi Air',s:'Isi chamber bawah dengan air panas',sec:0},{t:'Isi Kopi',s:'Isi basket dengan kopi, ratakan',sec:0},{t:'Panaskan',s:'Taruh di atas api kecil-sedang',sec:180},{t:'Angkat',s:'Angkat saat bunyi uap terdengar',sec:0}]},{id:'aero',nm:'Aeropress',params:[{l:'Kopi',v:'15 gr'},{l:'Air',v:'200 ml'},{l:'Suhu',v:'80°C'},{l:'Waktu',v:'1–2 mnt'}],steps:[{t:'Siapkan',s:'Pasang filter, pre-wet, taruh di gelas',sec:0},{t:'Isi Kopi',s:'Masukkan 15gr kopi medium-fine',sec:0},{t:'Tuang & Aduk',s:'Tuang 200ml air 80°C, aduk 10 detik',sec:10},{t:'Steep',s:'Pasang plunger, tunggu 1 menit',sec:60},{t:'Press',s:'Tekan perlahan 20–30 detik',sec:25}]},{id:'viet',nm:'Vietnam Drip',params:[{l:'Kopi',v:'20 gr'},{l:'Air',v:'120 ml'},{l:'Suhu',v:'96°C'},{l:'Waktu',v:'4–5 mnt'}],steps:[{t:'Siapkan Gelas',s:'Taruh gula/susu kental di dasar gelas',sec:0},{t:'Isi Kopi',s:'Isi filter, pasang penekan',sec:0},{t:'Bloom',s:'Tuang sedikit air, tunggu 30 detik',sec:30},{t:'Drip',s:'Tuang air panas, biarkan menetes',sec:210}]},{id:'syphon',nm:'Syphon',params:[{l:'Kopi',v:'20 gr'},{l:'Air',v:'300 ml'},{l:'Suhu',v:'93°C'},{l:'Waktu',v:'3–4 mnt'}],steps:[{t:'Isi Air',s:'Isi chamber bawah 300ml',sec:0},{t:'Panaskan',s:'Air naik ke chamber atas',sec:60},{t:'Masukkan Kopi',s:'Masukkan kopi, aduk 10 detik',sec:10},{t:'Brew',s:'Biarkan brew 1 menit',sec:60},{t:'Selesai',s:'Matikan api, kopi turun ke bawah',sec:30}]},{id:'espresso',nm:'Mesin Espresso',params:[{l:'Dosis',v:'18 gr'},{l:'Yield',v:'36 ml'},{l:'Tekanan',v:'9 bar'},{l:'Waktu',v:'25–30 dtk'}],steps:[{t:'Giling',s:'Timbang 18gr, giling halus',sec:0},{t:'Distribusi',s:'Ratakan, ketuk 2-3 kali',sec:0},{t:'Tamp',s:'Padatkan dengan tekanan merata',sec:0},{t:'Ekstraksi',s:'Mulai ekstraksi, target 25-30 dtk',sec:28}]},{id:'tubruk',nm:'Kopi Tubruk',params:[{l:'Kopi',v:'2 sdm'},{l:'Air',v:'150 ml'},{l:'Suhu',v:'100°C'},{l:'Waktu',v:'3–4 mnt'}],steps:[{t:'Masukkan',s:'Masukkan kopi bubuk+gula ke cangkir',sec:0},{t:'Tuang Air',s:'Tuang air mendidih',sec:0},{t:'Tunggu',s:'Tunggu 3-4 menit ampas mengendap',sec:240},{t:'Nikmati',s:'Minum perlahan dari tepi cangkir',sec:0}]},{id:'coldbrew',nm:'Cold Brew',params:[{l:'Kopi',v:'80 gr'},{l:'Air',v:'800 ml'},{l:'Suhu',v:'4°C'},{l:'Waktu',v:'12–24 jam'}],steps:[{t:'Campurkan',s:'Campur kopi giling kasar+air dingin',sec:0},{t:'Aduk',s:'Aduk rata, tutup wadah',sec:10},{t:'Simpan',s:'Simpan di kulkas 12–24 jam',sec:0},{t:'Saring',s:'Saring dengan filter kopi',sec:0},{t:'Sajikan',s:'Encerkan 1:1 dengan air/susu+es',sec:0}]}];
 
 /* ── MENUS (9 for dashboard) ─────────── */
@@ -1442,30 +1733,56 @@ function resetData(){if(!confirm('Reset semua data? Tidak dapat dikembalikan!'))
 function updateBell(){
   const now2=new Date();
   const lowStok=bahanList.filter(b=>(+b.minStok||0)>0&&(+b.stok||0)<=(+b.minStok||0));
-  const expWarn=bahanList.filter(b=>{if(!b.expired)return false;const d=new Date(b.expired);const diff=(d-now2)/(1000*60*60*24);return diff<=7&&diff>=-1;});
-  const expRed=bahanList.filter(b=>{if(!b.expired)return false;return new Date(b.expired)<now2;});
-  const total=lowStok.length+expWarn.length+expRed.length;
+  const outOfStok=bahanList.filter(b=>(+b.stok||0)===0);
+  const expWarn=bahanList.filter(b=>{if(!b.expired)return false;const d=new Date(b.expired);const diff=(d-now2)/(1000*60*60*24);return diff<=30&&diff>=-1;});
+  const expRed=bahanList.filter(b=>b.expired&&new Date(b.expired)<now2);
+  const hutangBelumLunas=jualList.filter(r=>r.lunas===false);
+  const total=lowStok.length+outOfStok.length+expWarn.length+expRed.length+hutangBelumLunas.length;
   const badge=document.getElementById('bell-badge');
   if(badge){badge.textContent=total;badge.style.display=total?'flex':'none';}
 }
 function openBellNotif(){
   const sc=document.getElementById('shcnt');if(!sc)return;
   const now2=new Date();
-  const low=bahanList.filter(b=>(+b.minStok||0)>0&&(+b.stok||0)<=(+b.minStok||0));
-  const expWarn=bahanList.filter(b=>{if(!b.expired)return false;const d=new Date(b.expired);const diff=(d-now2)/(1000*60*60*24);return diff<=7&&diff>=0;});
-  const expRed=bahanList.filter(b=>b.expired&&new Date(b.expired)<now2);
   const KE={kopi:'☕',susu:'🥛',gula:'🍬',topping:'🧁',kemasan:'📦'};
-  const lowHtml=low.map(b=>`<div class="srow"><div style="font-size:22px">${KE[b.kategori]||'📋'}</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${b.nama}</div><div style="font-size:11px;color:var(--rust);font-weight:600">⚠ Stok: ${fmtStok(+b.stok||0,b.satuan)}</div></div><button class="lab" style="color:var(--sage)" onclick="closeOv();nav('bahan');setTimeout(()=>editBahan('${b.id}'),400)">+Stok</button></div>`).join('');
-  const expWHtml=expWarn.map(b=>{const d=new Date(b.expired);const diff=Math.ceil((d-now2)/(1000*60*60*24));return `<div class="srow"><div style="font-size:22px">${KE[b.kategori]||'📋'}</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${b.nama}</div><div style="font-size:11px;color:#e8a020;font-weight:600">🟡 Exp: ${d.toLocaleDateString('id-ID')} (${diff} hari lagi)</div></div></div>`;}).join('');
-  const expRHtml=expRed.map(b=>`<div class="srow"><div style="font-size:22px">${KE[b.kategori]||'📋'}</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${b.nama}</div><div style="font-size:11px;color:var(--rust);font-weight:700">🔴 EXPIRED: ${new Date(b.expired).toLocaleDateString('id-ID')}</div></div></div>`).join('');
-  const allEmpty=!low.length&&!expWarn.length&&!expRed.length;
-  sc.innerHTML=`<div class="sht">🔔 Notifikasi Bahan</div>`+(expRHtml||expWHtml||lowHtml||'<div style="text-align:center;padding:24px;color:var(--mut)">Semua aman ✅</div>')+`<button class="btn ghost" style="margin-top:14px" onclick="closeOv()">Tutup</button>`;
-  document.getElementById('ov')?.classList.add('show');history.pushState(null,'',location.href);
-}
+  const outStok=bahanList.filter(b=>(+b.stok||0)===0);
+  const lowStok=bahanList.filter(b=>(+b.minStok||0)>0&&(+b.stok||0)>0&&(+b.stok||0)<=(+b.minStok||0));
+  const expWarn=bahanList.filter(b=>{if(!b.expired)return false;const d=new Date(b.expired);const diff=(d-now2)/(1000*60*60*24);return diff<=30&&diff>=0;});
+  const expRed=bahanList.filter(b=>b.expired&&new Date(b.expired)<now2);
+  const hutang=jualList.filter(r=>r.lunas===false);
 
-/* ══ HOME ═════════════════════════════ */
-let _dashTab='h';
-function setDashTab(t){document.querySelectorAll('.dash-tab').forEach(b=>b.classList.remove('on'));document.getElementById('dtab-'+t)?.classList.add('on');_dashTab=t;renderDashCards();}
+  let html=`<div class="sht">🔔 Notifikasi</div>`;
+
+  if(expRed.length){
+    html+=`<div style="font-size:10px;font-weight:700;color:var(--rust);text-transform:uppercase;margin-bottom:6px">🔴 SUDAH EXPIRED (${expRed.length})</div>`;
+    html+=expRed.map(b=>`<div class="srow" style="cursor:pointer" onclick="closeOv();nav('bahan');setTimeout(()=>setBahanFilter('${b.kategori||'all'}'),300)"><div style="font-size:20px">${KE[b.kategori]||'📋'}</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${b.nama}</div><div style="font-size:11px;color:var(--rust);font-weight:600">Expired: ${new Date(b.expired).toLocaleDateString('id-ID')}</div></div></div>`).join('');
+  }
+  if(expWarn.length){
+    html+=`<div style="font-size:10px;font-weight:700;color:#e8a020;text-transform:uppercase;margin:8px 0 6px">🟡 MENDEKATI EXPIRED (${expWarn.length})</div>`;
+    html+=expWarn.map(b=>{const diff=Math.ceil((new Date(b.expired)-now2)/(1000*60*60*24));return`<div class="srow" style="cursor:pointer" onclick="closeOv();nav('bahan');setTimeout(()=>setBahanFilter('${b.kategori||'all'}'),300)"><div style="font-size:20px">${KE[b.kategori]||'📋'}</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${b.nama}</div><div style="font-size:11px;color:#e8a020;font-weight:600">${diff} hari lagi — ${new Date(b.expired).toLocaleDateString('id-ID')}</div></div></div>`;}).join('');
+  }
+  if(outStok.length){
+    html+=`<div style="font-size:10px;font-weight:700;color:var(--rust);text-transform:uppercase;margin:8px 0 6px">📭 STOK HABIS (${outStok.length})</div>`;
+    html+=outStok.map(b=>`<div class="srow" style="cursor:pointer" onclick="closeOv();nav('bahan');setTimeout(()=>tambahStokBahan('${b.id}'),400)"><div style="font-size:20px">${KE[b.kategori]||'📋'}</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${b.nama}</div><div style="font-size:11px;color:var(--rust)">Stok = 0, klik untuk tambah</div></div></div>`).join('');
+  }
+  if(lowStok.length){
+    html+=`<div style="font-size:10px;font-weight:700;color:#e8a020;text-transform:uppercase;margin:8px 0 6px">⚠️ STOK MENIPIS (${lowStok.length})</div>`;
+    html+=lowStok.map(b=>`<div class="srow" style="cursor:pointer" onclick="closeOv();nav('bahan');setTimeout(()=>tambahStokBahan('${b.id}'),400)"><div style="font-size:20px">${KE[b.kategori]||'📋'}</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${b.nama}</div><div style="font-size:11px;color:#e8a020">Sisa: ${fmtStok(+b.stok||0,b.satuan)}</div></div></div>`).join('');
+  }
+  if(hutang.length){
+    const totHutang=hutang.reduce((s,r)=>s+(+r.hrg||0)*(+r.jml||1),0);
+    html+=`<div style="font-size:10px;font-weight:700;color:var(--rust);text-transform:uppercase;margin:8px 0 6px">💳 HUTANG BELUM LUNAS (${hutang.length})</div>`;
+    html+=hutang.map((r,i)=>`<div class="srow" style="cursor:pointer" onclick="closeOv();nav('penjualan');setTimeout(()=>setJTab('log'),300)"><div style="font-size:20px">💳</div><div style="flex:1"><div style="font-size:13px;font-weight:600">${r.debtor||'Pelanggan'}</div><div style="font-size:11px;color:var(--rust)">Rp ${((+r.hrg||0)*(+r.jml||1)).toLocaleString('id-ID')} — ${r.nama}</div><div style="font-size:10px;color:var(--mut)">${new Date(r.tanggal||'').toLocaleDateString('id-ID')}</div></div></div>`).join('');
+    html+=`<div style="font-size:12px;font-weight:700;color:var(--rust);text-align:right;padding:6px 0">Total: Rp ${totHutang.toLocaleString('id-ID')}</div>`;
+  }
+  if(!expRed.length&&!expWarn.length&&!outStok.length&&!lowStok.length&&!hutang.length){
+    html+='<div style="text-align:center;padding:24px;color:var(--mut)">Semua aman ✅</div>';
+  }
+  html+=`<button class="btn ghost" style="margin-top:14px" onclick="closeOv()">Tutup</button>`;
+  sc.innerHTML=html;
+  document.getElementById('ov')?.classList.add('show');
+  history.pushState(null,'',location.href);
+}
 function getDashData(period){
   const n2=new Date();let fromMs,toMs;
   if(period==='h'){fromMs=new Date(n2.getFullYear(),n2.getMonth(),n2.getDate(),0,0,0).getTime();toMs=new Date(n2.getFullYear(),n2.getMonth(),n2.getDate(),23,59,59).getTime();}
@@ -1586,7 +1903,7 @@ function renderCustom(){
   if(saved){const qn=document.getElementById('cuqn');if(qn)qn.value=cuQ;renderCuSaved();renderCuModalTable();}
 }
 function setCuSlot(i){aCuSlot=i;cuQ=1;renderCustom();}
-function setCuJenis(j){cuSlots[aCuSlot].jenis=j;localStorage.setItem('hk6_cu',JSON.stringify(cuSlots));renderCustom();}
+function setCuJenis(j){/* jenis removed */}
 function renderCuList(){
   const el=document.getElementById('cblist');if(!el)return;
   if(!bahanList.length){el.innerHTML='<div style="font-size:12px;color:var(--mut);padding:8px;text-align:center">Tambah bahan di Master Bahan terlebih dahulu</div>';renderCuTotal();return;}
@@ -1793,22 +2110,36 @@ function calcPen(){const j=+document.getElementById('pJml')?.value||0;const h=+d
 function addPen(){const nm=(document.getElementById('pNama')?.value||'').trim();const sat=document.getElementById('pSat')?.value||'';const hrg=+(document.getElementById('pHrg')?.value)||0;const jml=+(document.getElementById('pJml')?.value)||1;const note=(document.getElementById('pNote')?.value||'').trim();if(!nm||!hrg){showToast('⚠ Isi nama & harga!');return;}penList.unshift({id:Date.now(),nama:nm,sat,hrg,jml,note,tanggal:new Date().toISOString()});localStorage.setItem('hk6_pen',JSON.stringify(penList));['pNama','pSat','pHrg','pJml','pNote'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const tot=document.getElementById('pTotal');if(tot)tot.textContent='Total: Rp 0';renderPen();showToast('✅ Pembelian dicatat!');}
 function renderPen(){
   const el=document.getElementById('plist');if(!el)return;
-  const tot=penList.reduce((s,p)=>s+((+p.hrg||0)*(+p.jml||1)),0);
-  el.innerHTML=!penList.length?'<div style="text-align:center;padding:26px;color:var(--mut);font-size:12px">Belum ada catatan</div>'
-    :`<div class="crud-tot" style="margin-bottom:10px"><div class="crud-tot-l">Total Pembelian</div><div class="crud-tot-v">Rp ${tot.toLocaleString('id-ID')}</div></div>`
-    +penList.map((p,i)=>{
+  const filterFrom=document.getElementById('pen-from')?.value||'';
+  const filterTo=document.getElementById('pen-to')?.value||'';
+  let data=penList;
+  if(filterFrom||filterTo){
+    const fromMs=filterFrom?new Date(filterFrom+'T00:00:00').getTime():0;
+    const toMs=filterTo?new Date(filterTo+'T23:59:59').getTime():Infinity;
+    data=penList.filter(r=>{const ms=new Date(r.tanggal||'').getTime();return ms>=fromMs&&ms<=toMs;});
+  } else {
+    const todStr=new Date().toISOString().slice(0,10);
+    data=penList.filter(r=>(r.tanggal||'').slice(0,10)===todStr);
+  }
+  const tot=data.reduce((s,p)=>s+((+p.hrg||0)*(+p.jml||1)),0);
+  el.innerHTML=`<div class="crud-tot" style="margin-bottom:8px"><div class="crud-tot-l">Ditampilkan</div><div class="crud-tot-v">Rp ${tot.toLocaleString('id-ID')}</div></div>`
+    +(data.length?data.map(p=>{
+      const origIdx=penList.indexOf(p);
       const tgl=new Date(p.tanggal||'');
       const tglStr=p.tanggal?tgl.toLocaleDateString('id-ID')+' '+tgl.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}):'';
+      const now2=new Date();
+      const expExpired=p.expired&&new Date(p.expired)<now2;
+      const expWarn=p.expired&&!expExpired&&(new Date(p.expired)-now2)/(1000*60*60*24)<=30;
       return `<div class="log-item"><div class="log-info">
-        <div class="log-nm">${p.nama}</div>
-        <div class="log-det">${p.jml||1}× Rp ${(+p.hrg||0).toLocaleString('id-ID')} · ${tglStr}${p.expired?' · Exp: '+p.expired:''}</div>
+        <div class="log-nm">${p.nama}${expExpired?` <span style="color:var(--rust);font-size:10px">🔴 Expired</span>`:expWarn?` <span style="color:#e8a020;font-size:10px">🟡 Exp: ${p.expired}</span>`:''}</div>
+        <div class="log-det">${p.jml||1}× Rp ${(+p.hrg||0).toLocaleString('id-ID')} · ${tglStr}</div>
       </div>
       <div class="log-rp">Rp ${((+p.hrg||0)*(+p.jml||1)).toLocaleString('id-ID')}</div>
-      <div class="log-acts" style="display:flex;gap:4px">
-        <button class="lab" onclick="editPen(${i})" style="font-size:10px">✏</button>
-        <button class="lab" onclick="delPen(${i})" style="color:var(--rust);font-size:10px">×</button>
-      </div></div>`;
-    }).join('');
+      <div class="log-acts" style="display:flex;gap:3px">
+        <button class="lab" onclick="editPen(${origIdx})" style="font-size:9px">✏</button>
+        <button class="lab" onclick="delPen(${origIdx})" style="color:var(--rust);font-size:9px">×</button>
+      </div></div>`;}).join('')
+    :'<div style="text-align:center;padding:20px;color:var(--mut);font-size:12px">Tidak ada pembelian hari ini</div>');
 }
 function editPen(i){
   const p=penList[i];const sc=document.getElementById('shcnt');if(!sc)return;
@@ -1957,30 +2288,43 @@ function cancelEditProduk(){['jpNama','jpHrg','jpNote','jpStok','jpEditId'].forE
 function delProduk(id){if(!confirm('Hapus produk ini?'))return;produkList=produkList.filter(p=>p.id!==id);saveProdukLS();renderProdukList();renderKasir();showToast('🗑 Produk dihapus');}
 function tambahStokProduk(id){const sc=document.getElementById('shcnt');if(!sc)return;const p=produkList.find(x=>x.id===id);if(!p)return;const stokQty=getStokQty(id)||0;sc.innerHTML=`<div class="sht">➕ Tambah Stok: ${p.nama}</div><div class="srow"><div class="srl">Stok saat ini</div><div style="color:var(--sage);font-weight:600">${stokQty} pcs</div></div><div class="srow"><div class="srl">Tambah (pcs)</div><input class="sinp" type="number" id="spstok" min="1" placeholder="0"></div><button class="btn gold" style="margin-top:14px" onclick="konfirmasiStokProduk('${id}')">✅ Tambah</button><button class="btn ghost" style="margin-top:8px" onclick="closeOv()">Batal</button>`;document.getElementById('ov')?.classList.add('show');history.pushState(null,'',location.href);}
 function konfirmasiStokProduk(id){const qty=+(document.getElementById('spstok')?.value)||0;if(!qty){showToast('⚠ Masukkan jumlah!');return;}const p=produkList.find(x=>x.id===id);if(!p)return;addStokProduk(p.nama,p.jenis,qty);closeOv();renderProdukList();renderKasir();showToast('✅ Stok +'+qty+' pcs');}
-function renderProdukList(){const elP=document.getElementById('j-produk-produksi');const produksi=produkList.filter(p=>p.sumber==='resepku');if(elP)elP.innerHTML=!produksi.length?'<div style="text-align:center;padding:16px;color:var(--mut);font-size:12px">Simpan Resepku untuk auto tambah produk.</div>':produksi.map(p=>{const stokQty=getStokQty(p.id)||0;return `<div class="jp-item"><div style="font-size:24px">${JENIS_EM[p.jenis]||'📋'}</div><div class="jp-info"><div class="jp-nm">${p.nama}</div><div class="jp-det">Stok: <span style="color:${stokQty>0?'var(--sage)':'var(--rust)'};font-weight:600">${stokQty} pcs</span></div></div><div class="jp-hrg">${p.hrg>0?'Rp '+(+p.hrg).toLocaleString('id-ID'):'<span style="color:var(--mut);font-size:11px">Set harga</span>'}</div><div style="display:flex;gap:4px"><button class="lab" onclick="tambahStokProduk('${p.id}')">+</button><button class="lab" onclick="editProduk('${p.id}')">✏</button></div></div>`;}).join('');const elM=document.getElementById('j-produk-list');const manual=produkList.filter(p=>!p.sumber||p.sumber==='manual');if(elM)elM.innerHTML=!manual.length?'<div style="text-align:center;padding:16px;color:var(--mut);font-size:12px">Belum ada produk manual.</div>':manual.map(p=>{const stokQty=getStokQty(p.id)||0;return `<div class="jp-item"><div style="font-size:24px">${JENIS_EM[p.jenis]||'📋'}</div><div class="jp-info"><div class="jp-nm">${p.nama}</div><div class="jp-det">Stok: <span style="color:${stokQty>0?'var(--sage)':'var(--rust)'};font-weight:600">${stokQty||0} pcs</span></div></div><div class="jp-hrg">Rp ${(+p.hrg||0).toLocaleString('id-ID')}</div><div style="display:flex;gap:4px"><button class="lab" onclick="tambahStokProduk('${p.id}')">+</button><button class="lab" onclick="editProduk('${p.id}')">✏</button><button class="lab" onclick="delProduk('${p.id}')" style="color:var(--rust)">×</button></div></div>`;}).join('');}
+function renderProdukList(){const elP=document.getElementById('j-produk-produksi');const produksi=produkList.filter(p=>p.sumber==='resepku');if(elP)elP.innerHTML=!produksi.length?'<div style="text-align:center;padding:16px;color:var(--mut);font-size:12px">Simpan Resepku untuk auto tambah produk.</div>':produksi.map(p=>{const stokQty=getStokQty(p.id)||0;return `<div class="jp-item"><div style="font-size:24px">${JENIS_EM[p.jenis]||'📋'}</div><div class="jp-info"><div class="jp-nm">${p.nama}</div><div class="jp-det">Stok: <span style="color:${stokQty>0?'var(--sage)':'var(--rust)'};font-weight:600">${stokQty} pcs</span></div></div><div class="jp-hrg">${p.hrg>0?'Rp '+(+p.hrg).toLocaleString('id-ID'):'<span style="color:var(--mut);font-size:11px">Set harga</span>'}</div><div style="display:flex;gap:4px"><button class="lab" onclick="tambahStokProduk('${p.id}')">+</button><button class="lab" onclick="editProduk('${p.id}')">✏</button></div></div>`;}).join('');const elM=document.getElementById('j-produk-list');const manual=produkList.filter(p=>!p.sumber||p.sumber==='manual');if(elM)elM.innerHTML=!manual.length?'<div style="text-align:center;padding:16px;color:var(--mut);font-size:12px">Belum ada produk manual.</div>':manual.map(p=>{const stokQty=getStokQty(p.id)||0;return `<div class="jp-item"><div style="font-size:24px">${JENIS_EM[p.jenis]||'📋'}</div><div class="jp-info"><div class="jp-nm">${p.nama}</div><div class="jp-det">Stok: <span style="color:${stokQty>0?'var(--sage)':'var(--rust)'};font-weight:600">${stokQty||0} pcs</span></div></div><div class="jp-hrg">Rp ${(+p.hrg||0).toLocaleString('id-ID')}</div><div style="display:flex;gap:4px"><button class="lab" onclick="tambahStokProduk('${p.id}')">+</button><button class="lab" onclick="editProduk('${p.id}')">✏</button><span style="font-size:9px;color:var(--mut)">dari Resepku</span></div></div>`;}).join('');}
 function renderJual(){
   const el=document.getElementById('jlist');if(!el)return;
-  const tot=jualList.reduce((s,r)=>s+((+r.hrg||0)*(+r.jml||1)),0);
-  const totLunas=jualList.filter(r=>r.lunas!==false).reduce((s,r)=>s+((+r.hrg||0)*(+r.jml||1)),0);
+  const filterFrom=document.getElementById('jual-from')?.value||'';
+  const filterTo=document.getElementById('jual-to')?.value||'';
+  let data=jualList;
+  if(filterFrom||filterTo){
+    const fromMs=filterFrom?new Date(filterFrom+'T00:00:00').getTime():0;
+    const toMs=filterTo?new Date(filterTo+'T23:59:59').getTime():Infinity;
+    data=jualList.filter(r=>{const ms=new Date(r.tanggal||'').getTime();return ms>=fromMs&&ms<=toMs;});
+  } else {
+    // Default: hari ini saja
+    const tod=new Date();const todStr=tod.toISOString().slice(0,10);
+    data=jualList.filter(r=>(r.tanggal||'').slice(0,10)===todStr);
+  }
+  const tot=data.reduce((s,r)=>s+((+r.hrg||0)*(+r.jml||1)),0);
+  const totHarIni=jualList.filter(r=>(r.tanggal||'').slice(0,10)===new Date().toISOString().slice(0,10)).reduce((s,r)=>s+((+r.hrg||0)*(+r.jml||1)),0);
   const totHutang=jualList.filter(r=>r.lunas===false).reduce((s,r)=>s+((+r.hrg||0)*(+r.jml||1)),0);
-  el.innerHTML=`<div class="crud-tot" style="margin-bottom:6px"><div class="crud-tot-l">Total Penjualan</div><div class="crud-tot-v">Rp ${tot.toLocaleString('id-ID')}</div></div>`
-    +(totHutang>0?`<div style="display:flex;justify-content:space-between;padding:6px 12px;background:rgba(192,83,58,.08);border-radius:var(--r3);margin-bottom:12px;font-size:12px"><span style="color:var(--rust);font-weight:600">💳 Hutang belum lunas</span><span style="font-weight:700;color:var(--rust)">Rp ${totHutang.toLocaleString('id-ID')}</span></div>`:'')
-    +(jualList.length?jualList.map((p,i)=>{
+  el.innerHTML=`<div class="crud-tot" style="margin-bottom:6px"><div class="crud-tot-l">Ditampilkan</div><div class="crud-tot-v">Rp ${tot.toLocaleString('id-ID')}</div></div>`
+    +(totHutang>0?`<div style="display:flex;justify-content:space-between;padding:6px 12px;background:rgba(192,83,58,.08);border-radius:var(--r3);margin-bottom:8px;font-size:12px;cursor:pointer" onclick="openBellNotif()"><span style="color:var(--rust);font-weight:600">💳 Hutang</span><span style="font-weight:700;color:var(--rust)">Rp ${totHutang.toLocaleString('id-ID')}</span></div>`:'')
+    +(data.length?data.map((p,i)=>{
+      const origIdx=jualList.indexOf(p);
       const isHutang=p.lunas===false;
       const tgl=new Date(p.tanggal||'');
       const tglStr=tgl.toLocaleDateString('id-ID')+' '+tgl.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-      return `<div class="log-item" style="${isHutang?'background:rgba(192,83,58,.05);border-radius:var(--r3);padding:8px;':''}">
+      return `<div class="log-item" style="${isHutang?'background:rgba(192,83,58,.05);border-radius:var(--r3);padding:8px;margin-bottom:4px':''}">
         <div style="font-size:22px">${JENIS_EM[p.jenis]||'📋'}</div>
         <div class="log-info">
-          <div class="log-nm">${p.nama} × ${p.jml||1}${isHutang?` <span style="color:var(--rust);font-size:10px;font-weight:700">HUTANG — ${p.debtor||''}</span>`:''}</div>
+          <div class="log-nm">${p.nama} × ${p.jml||1}${isHutang?` <span style="color:var(--rust);font-size:10px;font-weight:700">💳 ${p.debtor||''}</span>`:''}</div>
           <div class="log-det">Rp ${((+p.hrg||0)*(+p.jml||1)).toLocaleString('id-ID')} · ${p.metode||'tunai'} · ${tglStr}</div>
         </div>
-        <div class="log-acts" style="display:flex;gap:4px;flex-direction:column;align-items:flex-end">
-          ${isHutang?`<button class="lab" style="color:var(--sage);font-size:10px;white-space:nowrap" onclick="lunaskanJual(${i})">✅ Lunas</button>`:''}
-          <button class="lab" onclick="editJualLog(${i})" style="font-size:10px">✏</button>
-          <button class="lab" onclick="delJual(${i})" style="color:var(--rust);font-size:10px">×</button>
-        </div>
-      </div>`;}).join(''):'<div style="text-align:center;padding:26px;color:var(--mut);font-size:12px">Belum ada log</div>');
+        <div class="log-acts" style="display:flex;gap:3px;flex-direction:column">
+          ${isHutang?`<button class="lab" style="color:var(--sage);font-size:9px" onclick="lunaskanJual(${origIdx})">✅Lunas</button>`:''}
+          <button class="lab" onclick="editJualLog(${origIdx})" style="font-size:9px">✏</button>
+          <button class="lab" onclick="delJual(${origIdx})" style="color:var(--rust);font-size:9px">×</button>
+        </div></div>`;}).join('')
+    :'<div style="text-align:center;padding:20px;color:var(--mut);font-size:12px">Tidak ada transaksi</div>');
 }
 function lunaskanJual(i){
   jualList[i].lunas=true;jualList[i].metode='lunas';
@@ -2014,6 +2358,16 @@ function saveEditJual(i){
   closeOv();renderJual();showToast('✅ Log diperbarui!');
 }
 function delJual(i){jualList.splice(i,1);localStorage.setItem('hk6_jual',JSON.stringify(jualList));renderJual();}
+function printUlangStruk(i){
+  const p=jualList[i];if(!p)return;
+  // Reconstruct struk
+  const items=[{nama:p.nama,jenis:p.jenis,hrg:+p.hrg||0,qty:+p.jml||1}];
+  const subtotal=items.reduce((s,k)=>s+k.hrg*k.qty,0);
+  const metodeSave=_payMethod;
+  _payMethod=p.metode||'tunai';
+  cetakStruk(items,subtotal,p.diskon||0,subtotal-(p.diskon||0),subtotal,0,p.metode||'tunai',p.note||'',p.tanggal||new Date().toISOString());
+  _payMethod=metodeSave;
+}
 
 /* ══ OVERLAY ══════════════════════════ */
 function openOv(type,mode){
@@ -2145,6 +2499,7 @@ function updateAboutPage(){
   const el=document.getElementById('app-version-display');
   if(el)el.textContent='v35';
 }
+
 </script>
 </body>
 </html>

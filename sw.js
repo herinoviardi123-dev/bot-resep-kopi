@@ -3,7 +3,7 @@
    Netlify: https://boisterous-cucurucho-2a78f0.netlify.app
 ══════════════════════════════════════════════ */
 
-const CACHE_NAME = 'heykopi-v35';
+const CACHE_NAME = 'heykopi-v36';
 const STATIC_CACHE = 'heykopi-static-v29';
 const FONT_CACHE = 'heykopi-fonts-v29';
 

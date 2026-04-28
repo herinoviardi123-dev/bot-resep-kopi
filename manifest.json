@@ -1,12 +1,12 @@
 {
   "name": "Hey Kopi",
   "short_name": "Hey Kopi",
-  "description": "Aplikasi Resep & Manajemen Kopi dari Gayo Highland — Botol, Cup, Brew Guide, HPP, Report",
+  "description": "Aplikasi Resep & Manajemen Kopi dari Gayo Highland",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f0ebe3",
   "theme_color": "#c49a6c",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "lang": "id",
   "categories": ["food", "business", "productivity"],
   "icons": [
@@ -19,11 +19,14 @@
     { "src": "/icons/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "maskable any" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable any" }
   ],
-  "screenshots": [],
   "shortcuts": [
-    { "name": "Resepku", "url": "/?pg=resepku", "description": "Buka Resepku" },
-    { "name": "Kasir", "url": "/?pg=penjualan", "description": "Buka Kasir" }
+    { "name": "Kasir", "url": "/?pg=penjualan", "icons": [{"src":"/icons/icon-96.png","sizes":"96x96"}] },
+    { "name": "Resepku", "url": "/?pg=resepku", "icons": [{"src":"/icons/icon-96.png","sizes":"96x96"}] },
+    { "name": "Report", "url": "/?pg=report", "icons": [{"src":"/icons/icon-96.png","sizes":"96x96"}] }
   ],
-  "related_applications": [],
-  "prefer_related_applications": false
+  "screenshots": [
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "platform": "wide" }
+  ],
+  "prefer_related_applications": false,
+  "id": "com.heykopi.app"
 }
